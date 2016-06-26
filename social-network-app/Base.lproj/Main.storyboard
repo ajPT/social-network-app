@@ -116,7 +116,7 @@
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxS-zs-c4f">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxS-zs-c4f" customClass="RoundedShadowedBtn" customModule="social_network_app" customModuleProvider="target">
                                                                         <rect key="frame" x="149" y="0.0" width="59" height="29"/>
                                                                         <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="12"/>
                                                                         <state key="normal" title="Click here!">
@@ -187,7 +187,7 @@
                                                                                     <constraint firstAttribute="width" constant="30" id="Cmw-BZ-UiN"/>
                                                                                 </constraints>
                                                                             </imageView>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA9-WL-BFA">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA9-WL-BFA" customClass="RoundedShadowedBtn" customModule="social_network_app" customModuleProvider="target">
                                                                                 <rect key="frame" x="35" y="0.0" width="157" height="30"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSans-Bold" family="Noto Sans" pointSize="15"/>
                                                                                 <state key="normal" title="Login With Facebook">
@@ -206,7 +206,7 @@
                                                                                     <constraint firstAttribute="height" constant="30" id="MAw-GY-u2l"/>
                                                                                 </constraints>
                                                                             </imageView>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fg-f8-JLc">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fg-f8-JLc" customClass="RoundedShadowedBtn" customModule="social_network_app" customModuleProvider="target">
                                                                                 <rect key="frame" x="35" y="0.0" width="157" height="30"/>
                                                                                 <fontDescription key="fontDescription" name="NotoSans-Bold" family="Noto Sans" pointSize="15"/>
                                                                                 <state key="normal" title="Login With Google">
@@ -240,7 +240,7 @@
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azi-KO-s1P">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azi-KO-s1P" customClass="RoundedShadowedBtn" customModule="social_network_app" customModuleProvider="target">
                                                                         <rect key="frame" x="162" y="0.0" width="54" height="32"/>
                                                                         <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="14"/>
                                                                         <state key="normal" title="Sign up.">
