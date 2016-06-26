@@ -14,6 +14,8 @@
 		E00CAC281D2009270096B7A6 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E00CAC241D2009270096B7A6 /* NotoSans-Regular.ttf */; };
 		E00CAC2D1D2017780096B7A6 /* RoundedShadowedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00CAC2C1D2017780096B7A6 /* RoundedShadowedView.swift */; };
 		E00CAC301D20181F0096B7A6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00CAC2F1D20181F0096B7A6 /* Constants.swift */; };
+		E00CAC321D202BC30096B7A6 /* RoundedShadowedBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00CAC311D202BC30096B7A6 /* RoundedShadowedBtn.swift */; };
+		E00CAC341D202BDA0096B7A6 /* RoundedBorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00CAC331D202BDA0096B7A6 /* RoundedBorderedTextField.swift */; };
 		E0658CAD1D1FE5E2008F488D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0658CAC1D1FE5E2008F488D /* AppDelegate.swift */; };
 		E0658CAF1D1FE5E2008F488D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0658CAE1D1FE5E2008F488D /* ViewController.swift */; };
 		E0658CB21D1FE5E2008F488D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0658CB01D1FE5E2008F488D /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 		E00CAC241D2009270096B7A6 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		E00CAC2C1D2017780096B7A6 /* RoundedShadowedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedShadowedView.swift; sourceTree = "<group>"; };
 		E00CAC2F1D20181F0096B7A6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E00CAC311D202BC30096B7A6 /* RoundedShadowedBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedShadowedBtn.swift; sourceTree = "<group>"; };
+		E00CAC331D202BDA0096B7A6 /* RoundedBorderedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedBorderedTextField.swift; sourceTree = "<group>"; };
 		E0658CA91D1FE5E2008F488D /* social-network-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "social-network-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0658CAC1D1FE5E2008F488D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0658CAE1D1FE5E2008F488D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 				E0658CB01D1FE5E2008F488D /* Main.storyboard */,
 				E0658CB51D1FE5E2008F488D /* LaunchScreen.storyboard */,
 				E00CAC2C1D2017780096B7A6 /* RoundedShadowedView.swift */,
+				E00CAC311D202BC30096B7A6 /* RoundedShadowedBtn.swift */,
+				E00CAC331D202BDA0096B7A6 /* RoundedBorderedTextField.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -278,8 +284,10 @@
 			files = (
 				E00CAC2D1D2017780096B7A6 /* RoundedShadowedView.swift in Sources */,
 				E0658CAF1D1FE5E2008F488D /* ViewController.swift in Sources */,
+				E00CAC341D202BDA0096B7A6 /* RoundedBorderedTextField.swift in Sources */,
 				E0658CAD1D1FE5E2008F488D /* AppDelegate.swift in Sources */,
 				E00CAC301D20181F0096B7A6 /* Constants.swift in Sources */,
+				E00CAC321D202BC30096B7A6 /* RoundedShadowedBtn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
