@@ -5,6 +5,20 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="NotoSans-Regular.ttf">
+            <string>NotoSans</string>
+            <string>NotoSans</string>
+            <string>NotoSans</string>
+            <string>NotoSans</string>
+            <string>NotoSans</string>
+            <string>NotoSans</string>
+            <string>NotoSans</string>
+            <string>NotoSans</string>
+            <string>NotoSans</string>
+            <string>NotoSans</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -47,45 +61,51 @@
                                 <rect key="frame" x="20" y="171" width="560" height="208"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bio-4H-JIq" userLabel="forgotSV">
-                                        <rect key="frame" x="66" y="148" width="266" height="30"/>
+                                        <rect key="frame" x="66" y="148" width="276" height="33"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Forgot your login details?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJd-v1-FDT">
-                                                <rect key="frame" x="0.0" y="0.0" width="193" height="30"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="203" height="33"/>
+                                                <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxS-zs-c4f">
-                                                <rect key="frame" x="193" y="0.0" width="73" height="30"/>
+                                                <rect key="frame" x="203" y="0.0" width="73" height="33"/>
+                                                <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="15"/>
                                                 <state key="normal" title="Click here!"/>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4Q-vV-Hqx">
-                                        <rect key="frame" x="66" y="36" width="317" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tzs-M6-rbN">
-                                        <rect key="frame" x="66" y="76" width="317" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <rect key="frame" x="8" y="28" width="544" height="30"/>
+                                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hww-zE-Tgx">
                                         <rect key="frame" x="195" y="107" width="79" height="30"/>
+                                        <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="15"/>
                                         <state key="normal" title="LOGIN"/>
                                     </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tzs-M6-rbN">
+                                        <rect key="frame" x="8" y="69" width="544" height="30"/>
+                                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3vW-fZ-CUa" userLabel="socialAccountsView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3vW-fZ-CUa" userLabel="socialAccountsView" customClass="RoundedShadowedView" customModule="social_network_app" customModuleProvider="target">
                                 <rect key="frame" x="20" y="408" width="560" height="115"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cJc-Ws-L6R" userLabel="socialSV">
-                                        <rect key="frame" x="92" y="12" width="191" height="60"/>
+                                        <rect key="frame" x="92" y="12" width="197" height="60"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4aF-fJ-pcp" userLabel="facebookSV">
-                                                <rect key="frame" x="0.0" y="0.0" width="191" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="197" height="30"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="dtm-7O-XO3">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -95,15 +115,15 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Login With Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhu-AS-1tQ">
-                                                        <rect key="frame" x="30" y="0.0" width="161" height="30"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="30" y="0.0" width="167" height="30"/>
+                                                        <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hNk-bl-i9D" userLabel="googleSV">
-                                                <rect key="frame" x="0.0" y="30" width="171" height="30"/>
+                                                <rect key="frame" x="0.0" y="30" width="178" height="30"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-Vf-wPk">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -113,8 +133,8 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Login With Google" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BhA-aS-6z5">
-                                                        <rect key="frame" x="30" y="0.0" width="141" height="30"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="30" y="0.0" width="148" height="30"/>
+                                                        <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -125,24 +145,23 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ovs-3H-zhk">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ovs-3H-zhk" customClass="RoundedShadowedView" customModule="social_network_app" customModuleProvider="target">
                                 <rect key="frame" x="20" y="536" width="560" height="49"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWT-Qh-wao">
-                                        <rect key="frame" x="119" y="14" width="247" height="21"/>
+                                        <rect key="frame" x="119" y="14" width="248" height="33"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Don't have an account? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWk-hA-E0U">
-                                                <rect key="frame" x="0.0" y="0.0" width="184" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Don't have an account? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWk-hA-E0U">
+                                                <rect key="frame" x="0.0" y="0.0" width="190" height="33"/>
+                                                <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sign up." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0a8-MD-eHs">
-                                                <rect key="frame" x="184" y="0.0" width="63" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azi-KO-s1P">
+                                                <rect key="frame" x="190" y="0.0" width="58" height="33"/>
+                                                <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="15"/>
+                                                <state key="normal" title="Sign up."/>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -164,7 +183,7 @@
                                             <constraint firstAttribute="height" constant="21" id="EO8-Gc-muI"/>
                                             <constraint firstAttribute="width" constant="28" id="eXa-O9-u4R"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
