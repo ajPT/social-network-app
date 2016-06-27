@@ -22,6 +22,9 @@
 		E0658CB41D1FE5E2008F488D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0658CB31D1FE5E2008F488D /* Assets.xcassets */; };
 		E0658CB71D1FE5E2008F488D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0658CB51D1FE5E2008F488D /* LaunchScreen.storyboard */; };
 		E0658CBF1D1FE61B008F488D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0658CBE1D1FE61B008F488D /* GoogleService-Info.plist */; };
+		E0E954C31D20A393007C8F78 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */; };
+		E0E954C41D20A393007C8F78 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */; };
+		E0E954C51D20A393007C8F78 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C21D20A392007C8F78 /* Bolts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,9 @@
 		E0658CB61D1FE5E2008F488D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0658CB81D1FE5E2008F488D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0658CBE1D1FE61B008F488D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		E0E954C21D20A392007C8F78 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		EDA0E8A4E8E1B81D8A02AC7B /* Pods_social_network_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_social_network_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -51,7 +57,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0E954C31D20A393007C8F78 /* FBSDKLoginKit.framework in Frameworks */,
+				E0E954C41D20A393007C8F78 /* FBSDKCoreKit.framework in Frameworks */,
 				DBEF151486D7C83859D8C7AE /* Pods_social_network_app.framework in Frameworks */,
+				E0E954C51D20A393007C8F78 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,12 +156,23 @@
 				E00CAC2A1D200DDE0096B7A6 /* View */,
 				E00CAC291D200DD00096B7A6 /* Controller */,
 				E00CAC201D2009130096B7A6 /* Fonts */,
+				E0E954BF1D20A354007C8F78 /* Frameworks */,
 				E00CAC2E1D2018080096B7A6 /* Utils */,
 				E0658CB31D1FE5E2008F488D /* Assets.xcassets */,
 				E0658CB81D1FE5E2008F488D /* Info.plist */,
 				E0658CBE1D1FE61B008F488D /* GoogleService-Info.plist */,
 			);
 			path = "social-network-app";
+			sourceTree = "<group>";
+		};
+		E0E954BF1D20A354007C8F78 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */,
+				E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */,
+				E0E954C21D20A392007C8F78 /* Bolts.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,6 +423,10 @@
 			baseConfigurationReference = 0F72DD570571A0D9B29787A1 /* Pods-social-network-app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/social-network-app",
+				);
 				INFOPLIST_FILE = "social-network-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "amadeujandrade.social-network-app";
@@ -415,6 +439,10 @@
 			baseConfigurationReference = 429A30D9120C45BE59083673 /* Pods-social-network-app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/social-network-app",
+				);
 				INFOPLIST_FILE = "social-network-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "amadeujandrade.social-network-app";
