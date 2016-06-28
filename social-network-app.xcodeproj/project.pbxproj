@@ -21,10 +21,10 @@
 		E0658CB21D1FE5E2008F488D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0658CB01D1FE5E2008F488D /* Main.storyboard */; };
 		E0658CB41D1FE5E2008F488D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0658CB31D1FE5E2008F488D /* Assets.xcassets */; };
 		E0658CB71D1FE5E2008F488D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0658CB51D1FE5E2008F488D /* LaunchScreen.storyboard */; };
-		E0658CBF1D1FE61B008F488D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0658CBE1D1FE61B008F488D /* GoogleService-Info.plist */; };
 		E0E954C31D20A393007C8F78 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */; };
 		E0E954C41D20A393007C8F78 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */; };
 		E0E954C51D20A393007C8F78 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C21D20A392007C8F78 /* Bolts.framework */; };
+		E0E954C71D22918D007C8F78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0E954C61D22918C007C8F78 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,10 +45,10 @@
 		E0658CB31D1FE5E2008F488D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0658CB61D1FE5E2008F488D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0658CB81D1FE5E2008F488D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E0658CBE1D1FE61B008F488D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		E0E954C21D20A392007C8F78 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		E0E954C61D22918C007C8F78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDA0E8A4E8E1B81D8A02AC7B /* Pods_social_network_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_social_network_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -160,7 +160,7 @@
 				E00CAC2E1D2018080096B7A6 /* Utils */,
 				E0658CB31D1FE5E2008F488D /* Assets.xcassets */,
 				E0658CB81D1FE5E2008F488D /* Info.plist */,
-				E0658CBE1D1FE61B008F488D /* GoogleService-Info.plist */,
+				E0E954C61D22918C007C8F78 /* GoogleService-Info.plist */,
 			);
 			path = "social-network-app";
 			sourceTree = "<group>";
@@ -237,8 +237,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E00CAC261D2009270096B7A6 /* NotoSans-BoldItalic.ttf in Resources */,
+				E0E954C71D22918D007C8F78 /* GoogleService-Info.plist in Resources */,
 				E0658CB71D1FE5E2008F488D /* LaunchScreen.storyboard in Resources */,
-				E0658CBF1D1FE61B008F488D /* GoogleService-Info.plist in Resources */,
 				E0658CB41D1FE5E2008F488D /* Assets.xcassets in Resources */,
 				E00CAC281D2009270096B7A6 /* NotoSans-Regular.ttf in Resources */,
 				E00CAC271D2009270096B7A6 /* NotoSans-Italic.ttf in Resources */,
