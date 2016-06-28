@@ -22,8 +22,9 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
     
     //MARK: - Login
     
-    @IBAction func onFacebookBtnPressed(sender: UIButton) {
+    //MARK: Facebook
     
+    @IBAction func onFacebookBtnPressed(sender: UIButton) {
         let facebookLogin = FBSDKLoginManager()
         
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
@@ -36,6 +37,8 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
             }
         }
     }
+    
+    //MARK: Google
     
     @IBAction func onGoogleBtnPressed(sender: UIButton) {
         GIDSignIn.sharedInstance().uiDelegate = self
