@@ -45,6 +45,7 @@
 		E0658CB31D1FE5E2008F488D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0658CB61D1FE5E2008F488D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0658CB81D1FE5E2008F488D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0AC76C61D22E8FA00396FD4 /* Social-Network-App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Social-Network-App-Bridging-Header.h"; sourceTree = "<group>"; };
 		E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		E0E954C21D20A392007C8F78 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -161,6 +162,7 @@
 				E0658CB31D1FE5E2008F488D /* Assets.xcassets */,
 				E0658CB81D1FE5E2008F488D /* Info.plist */,
 				E0E954C61D22918C007C8F78 /* GoogleService-Info.plist */,
+				E0AC76C61D22E8FA00396FD4 /* Social-Network-App-Bridging-Header.h */,
 			);
 			path = "social-network-app";
 			sourceTree = "<group>";
@@ -431,6 +433,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "amadeujandrade.social-network-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "social-network-app/Social-Network-App-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -447,6 +450,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "amadeujandrade.social-network-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "social-network-app/Social-Network-App-Bridging-Header.h";
 			};
 			name = Release;
 		};

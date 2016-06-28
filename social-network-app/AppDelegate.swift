@@ -12,16 +12,25 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+        //Firebase
         FIRApp.configure()
+        //Facebook
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        //Google
+        // Initialize sign-in
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        GIDSignIn.sharedInstance().delegate = self
+        
+        return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -50,6 +59,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        return GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+    }
+    
+    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            let userId = user.userID // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let email = user.profile.email
+            print("GOOGLE_ID: \(userId)")
+            print("TOKEN: \(idToken)")
+            print("EMAIL: \(email)")
+            // ...
+        } else {
+            print("\(error.localizedDescription)")
+        }
+    }
+    
+    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,
+                withError error: NSError!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
+    }
+
 
 }
 

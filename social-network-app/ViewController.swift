@@ -10,7 +10,7 @@ import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GIDSignInUIDelegate {
 
     //MARK: - View Life Cycle
     
@@ -35,8 +35,13 @@ class ViewController: UIViewController {
                 print("Login successful. \(accessToken)")
             }
         }
-        
     }
+    
+    @IBAction func onGoogleBtnPressed(sender: UIButton) {
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
+    }
+
 
 
 }
