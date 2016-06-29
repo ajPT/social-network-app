@@ -26,9 +26,7 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
     @IBAction func onFacebookBtnPressed(sender: UIButton) {
         let facebookLogin = FBSDKLoginManager()
-        print("ENTROU")
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
-            print("ENTROU2")
             if error != nil {
                 print("Facebook login failed!")
             } else {
