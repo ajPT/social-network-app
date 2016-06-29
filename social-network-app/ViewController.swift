@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
+import Firebase
 
 class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
 
@@ -16,7 +17,13 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+//        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
+//            self.performSegueWithIdentifier(LOGGED_IN, sender: nil)
+//        }
     }
     
     
@@ -31,7 +38,19 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 print("Facebook login failed!")
             } else {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
-                print("Login successful. \(accessToken)")
+                let credential = FIRFacebookAuthProvider.credentialWithAccessToken(accessToken)
+                print("Login successful.")
+                
+                FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+                    if error != nil {
+                        print("Login failed. \(error.debugDescription)")
+                    } else {
+                        print("userID: \(user?.uid)")
+                        NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
+                        self.performSegueWithIdentifier(LOGGED_IN, sender: nil)
+                    }
+                }
+                
             }
         }
     }
@@ -50,14 +69,18 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
         if (error == nil) {
-            // Perform any operations on signed in user here.
-            let userId = user.userID // For client-side use only!
-            let idToken = user.authentication.idToken // Safe to send to the server
-            let email = user.profile.email
-            print("GOOGLE_ID: \(userId)")
-            print("TOKEN: \(idToken)")
-            print("EMAIL: \(email)")
-            // ...
+            //let userId = user.userID
+            //let email = user.profile.email
+            let idToken = user.authentication.idToken
+            let accessToken = user.authentication.accessToken
+            let credential = FIRGoogleAuthProvider.credentialWithIDToken(idToken, accessToken: accessToken)
+
+            FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+                print("UserID: \(user?.uid)")
+                NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
+                self.performSegueWithIdentifier(LOGGED_IN, sender: nil)
+            }
+
         } else {
             print("\(error.localizedDescription)")
         }

@@ -298,10 +298,31 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="736"/>
+                    <connections>
+                        <segue destination="D45-Nm-vvc" kind="show" identifier="loggedIn" id="x0v-do-mpg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="265" y="301"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="BHx-R5-rWT">
+            <objects>
+                <viewController id="D45-Nm-vvc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gWP-Mg-ENJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="GGK-mk-xPZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B4J-qT-EKw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.70294148489999997" green="0.4069054111" blue="0.53429110739999996" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P1M-Zc-sJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="980" y="293"/>
         </scene>
     </scenes>
     <resources>

@@ -8,6 +8,7 @@ target 'social-network-app' do
   # Pods for social-network-app
   pod 'Firebase'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
   pod 'Google/SignIn'
 
 end
