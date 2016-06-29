@@ -11,7 +11,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import Firebase
 
-class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
+class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
 
     //MARK: - View Life Cycle
     
