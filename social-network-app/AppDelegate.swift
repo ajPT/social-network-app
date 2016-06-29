@@ -57,15 +57,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // iOS 9 and above
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        let googleDidHandle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
-        let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(app, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+        
+        let sourceApp = options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String
+        let anno = options[UIApplicationOpenURLOptionsAnnotationKey]
+        
+        let googleDidHandle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApp, annotation: anno)
+        let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(app, openURL: url, sourceApplication: sourceApp, annotation: anno)
         
         return facebookDidHandle || googleDidHandle
         
     }
     
-    
-
 
 }
 
