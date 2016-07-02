@@ -14,6 +14,7 @@ import Firebase
 class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
 
     //MARK: - IBOutlets
+    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -32,10 +33,9 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     
-    //MARK: - Login
+    //MARK: - IBActions
     
-    //MARK: Facebook
-    
+    //MARK: Facebook Login
     @IBAction func onFacebookBtnPressed(sender: UIButton) {
         let facebookLogin = FBSDKLoginManager()
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
@@ -60,8 +60,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         }
     }
     
-    //MARK: Google
-    
+    //MARK: Google Login
     @IBAction func onGoogleBtnPressed(sender: UIButton) {
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
@@ -97,28 +96,35 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         // ...
     }
     
-    //MARK: Email/Password
-    
+    //MARK: Email/Password Login
     @IBAction func onLoginBtnPressed(sender: UIButton) {
     
         if let email = emailField.text where email != "", let password = passwordField.text where password != "" {
         
+            FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
+                // ...
+                print("USER: \(user)")
+                print("ERROR: \(error)")
+            }
+            
         } else {
             showAlert("Email and Password Required", msg: "You must enter an email and a password")
         }
     
     }
-    
+
+    //MARK: Create new account
+    @IBAction func onSignUpBtnPressed(sender: UIButton) {
+        performSegueWithIdentifier("createAccountScreen", sender: nil)
+    }
+
     //TODO: - Move this to utilities
-    
     func showAlert(title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .Alert)
         let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
-
-
 
 }
 
