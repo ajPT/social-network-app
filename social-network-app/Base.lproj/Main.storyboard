@@ -88,7 +88,7 @@
                                                                         <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <constraints>
@@ -106,6 +106,9 @@
                                                                 <state key="normal" title="LOGIN">
                                                                     <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="onLoginBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0jV-99-W7j"/>
+                                                                </connections>
                                                             </button>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Bio-4H-JIq" userLabel="forgotSV">
                                                                 <rect key="frame" x="176" y="173" width="208" height="29"/>
@@ -299,6 +302,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="736"/>
                     <connections>
+                        <outlet property="emailField" destination="I4Q-vV-Hqx" id="uR2-2E-oW8"/>
+                        <outlet property="passwordField" destination="Tzs-M6-rbN" id="tks-EP-4cn"/>
                         <segue destination="D45-Nm-vvc" kind="show" identifier="loggedIn" id="x0v-do-mpg"/>
                     </connections>
                 </viewController>

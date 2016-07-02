@@ -13,6 +13,11 @@ import Firebase
 
 class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
 
+    //MARK: - IBOutlets
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
+    
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -90,6 +95,27 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 withError error: NSError!) {
         // Perform any operations when the user disconnects from app here.
         // ...
+    }
+    
+    //MARK: Email/Password
+    
+    @IBAction func onLoginBtnPressed(sender: UIButton) {
+    
+        if let email = emailField.text where email != "", let password = passwordField.text where password != "" {
+        
+        } else {
+            showAlert("Email and Password Required", msg: "You must enter an email and a password")
+        }
+    
+    }
+    
+    //TODO: - Move this to utilities
+    
+    func showAlert(title: String, msg: String) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
     }
 
 
