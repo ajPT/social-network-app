@@ -23,6 +23,7 @@
 		E0658CB71D1FE5E2008F488D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0658CB51D1FE5E2008F488D /* LaunchScreen.storyboard */; };
 		E0AC76C91D24379100396FD4 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC76C81D24379100396FD4 /* DataService.swift */; };
 		E0AC76CB1D28234000396FD4 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC76CA1D28234000396FD4 /* SignUpVC.swift */; };
+		E0AC76CD1D28257F00396FD4 /* UtilAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC76CC1D28257F00396FD4 /* UtilAlerts.swift */; };
 		E0E954C31D20A393007C8F78 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */; };
 		E0E954C41D20A393007C8F78 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */; };
 		E0E954C51D20A393007C8F78 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C21D20A392007C8F78 /* Bolts.framework */; };
@@ -50,6 +51,7 @@
 		E0AC76C61D22E8FA00396FD4 /* Social-Network-App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Social-Network-App-Bridging-Header.h"; sourceTree = "<group>"; };
 		E0AC76C81D24379100396FD4 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		E0AC76CA1D28234000396FD4 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		E0AC76CC1D28257F00396FD4 /* UtilAlerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilAlerts.swift; sourceTree = "<group>"; };
 		E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		E0E954C21D20A392007C8F78 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				E00CAC2F1D20181F0096B7A6 /* Constants.swift */,
+				E0AC76CC1D28257F00396FD4 /* UtilAlerts.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0AC76CD1D28257F00396FD4 /* UtilAlerts.swift in Sources */,
 				E0AC76CB1D28234000396FD4 /* SignUpVC.swift in Sources */,
 				E00CAC2D1D2017780096B7A6 /* RoundedShadowedView.swift in Sources */,
 				E0AC76C91D24379100396FD4 /* DataService.swift in Sources */,

@@ -28,9 +28,15 @@ class SignUpVC: UIViewController {
     
     //MARK: Create Account
     @IBAction func onSignUpBtnPressed(sender: UIButton) {
-        //FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
-        // ...
-        //}
+        
+        if let email = emailField.text where email != "", let password = passwordField.text where password != "" {
+            
+            FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
+                //...
+            }
+            
+        }
+       
     }
 
     //MARK: Cancel

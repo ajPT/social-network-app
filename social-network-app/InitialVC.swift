@@ -108,9 +108,9 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             }
             
         } else {
-            showAlert("Email and Password Required", msg: "You must enter an email and a password")
+            UtilAlerts().showAlert(self, title: "Email and Password Required", msg: "You must enter an email and a password")
         }
-    
+        
     }
 
     //MARK: Create new account
@@ -118,13 +118,6 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         performSegueWithIdentifier("createAccountScreen", sender: nil)
     }
 
-    //TODO: - Move this to utilities
-    func showAlert(title: String, msg: String) {
-        let alert = UIAlertController(title: title, message: msg, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
-        alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
-    }
 
 }
 
