@@ -52,7 +52,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                     } else {
                         print("userID: \(user?.uid)")
                         NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
-                        self.performSegueWithIdentifier(LOGGED_IN, sender: nil)
+                        self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                     }
                 }
                 
@@ -82,7 +82,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
                 print("UserID: \(user?.uid)")
                 NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
-                self.performSegueWithIdentifier(LOGGED_IN, sender: nil)
+                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
             }
 
         } else {
@@ -115,7 +115,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
 
     //MARK: Create new account
     @IBAction func onSignUpBtnPressed(sender: UIButton) {
-        performSegueWithIdentifier("createAccountScreen", sender: nil)
+        performSegueWithIdentifier(SEGUE_CREATE_ACCOUNT, sender: nil)
     }
 
 

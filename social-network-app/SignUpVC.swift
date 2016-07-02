@@ -32,9 +32,25 @@ class SignUpVC: UIViewController {
         if let email = emailField.text where email != "", let password = passwordField.text where password != "" {
             
             FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
-                //...
+                if error != nil {
+                    if error?.code == STATUS_ERROR_EMAIL_ALREADY_IN_USE {
+                        UtilAlerts().showAlert(self, title: "Email already exists", msg: "The email address is already in use by another account.")
+                    } else if error?.code == STATUS_ERROR_WEAK_PASSWORD {
+                        self.passwordField.text = ""
+                        UtilAlerts().showAlert(self, title: "Weak Password", msg: "The password must be 6 characters long or more.")
+                    } else {
+                        print(error)
+                        UtilAlerts().showAlert(self, title: "Unknown Reason", msg: "The account cannot be created.")
+                    }
+                } else {
+                    //Account created
+                    print(user)
+                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
+                }
             }
             
+        } else {
+            UtilAlerts().showAlert(self, title: "Email and Password Required", msg: "You must enter an email and a password")
         }
        
     }
