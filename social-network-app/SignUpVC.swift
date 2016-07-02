@@ -46,6 +46,14 @@ class SignUpVC: UIViewController {
                     //Account created
                     print(user)
                     NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
+                    FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (_: FIRUser?, err: NSError?) in
+                        if err != nil {
+                            print(err)
+                            UtilAlerts().showAlert(self, title: "Unknown Reason", msg: "The account was created but the login failed.")
+                        } else {
+                            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                        }
+                    })
                 }
             }
             
