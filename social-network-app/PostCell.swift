@@ -25,6 +25,12 @@ class PostCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    override func drawRect(rect: CGRect) {
+        userImage.layer.cornerRadius = userImage.frame.size.width / 2
+        userImage.clipsToBounds = true
+        postImage.clipsToBounds = true
+    }
+    
     
     //MARK: Cell Configuration
 
