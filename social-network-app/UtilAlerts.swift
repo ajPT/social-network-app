@@ -19,9 +19,10 @@ class UtilAlerts {
     //MARK: Titles
     struct Titles {
         static let ERROR_EMAIL_ALREADY_IN_USE = "Email already exists"
-        static let ERROR_WEAK_PASSWORD = "Weak Password"
-        static let MISSING_EMAIL_PASSWORD = "Email and Password Required"
-        static let UNKNOWN = "Unknown Reason"
+        static let ERROR_WEAK_PASSWORD = "Weak password"
+        static let MISSING_EMAIL_PASSWORD = "Email and password required"
+        static let ERROR_NETWORK_REQUEST_FAILED = "No network connection"
+        static let UNKNOWN = "Unknown reason"
     }
     
     //MARK: Login
@@ -31,6 +32,8 @@ class UtilAlerts {
         static let UNKNOWN_ERROR_CREATE = "The account cannot be created."
         static let UNKNOWN_ERROR_CREATE_LOGIN = "The account was created but the login failed."
         static let MISSING_EMAIL_PASSWORD = "You must enter an email and a password"
+        static let ERROR_NETWORK_REQUEST_FAILED = "Please check your network connection."
+        static let UNKNOWN_ERROR_LOGIN = "Login failed."
     }
     
     

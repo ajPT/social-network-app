@@ -38,6 +38,8 @@ class SignUpVC: UIViewController {
                     } else if error?.code == STATUS_ERROR_WEAK_PASSWORD {
                         self.passwordField.text = ""
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WEAK_PASSWORD, msg: UtilAlerts.LoginMessages.ERROR_WEAK_PASSWORD)
+                    } else if error?.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.LoginMessages.ERROR_NETWORK_REQUEST_FAILED)
                     } else {
                         print(error)
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_CREATE)

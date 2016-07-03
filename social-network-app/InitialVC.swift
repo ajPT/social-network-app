@@ -102,9 +102,19 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         if let email = emailField.text where email != "", let password = passwordField.text where password != "" {
         
             FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
-                // ...
-                print("USER: \(user)")
-                print("ERROR: \(error)")
+                if error != nil {
+                    if error?.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.LoginMessages.ERROR_NETWORK_REQUEST_FAILED)
+                    } else {
+                        print("ERROR: \(error)")
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_LOGIN)
+                    }
+                } else {
+                    print("USER: \(user)")
+                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
+                    self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                }
+                
             }
             
         } else {
