@@ -18,13 +18,21 @@ class UtilAlerts {
     
     //MARK: Titles
     struct Titles {
-        //...
+        static let ERROR_EMAIL_ALREADY_IN_USE = "Email already exists"
+        static let ERROR_WEAK_PASSWORD = "Weak Password"
+        static let MISSING_EMAIL_PASSWORD = "Email and Password Required"
+        static let UNKNOWN = "Unknown Reason"
     }
     
     //MARK: Login
     struct LoginMessages {
-        //...
+        static let ERROR_EMAIL_ALREADY_IN_USE = "The email address is already in use by another account."
+        static let ERROR_WEAK_PASSWORD = "The password must be 6 characters long or more."
+        static let UNKNOWN_ERROR_CREATE = "The account cannot be created."
+        static let UNKNOWN_ERROR_CREATE_LOGIN = "The account was created but the login failed."
+        static let MISSING_EMAIL_PASSWORD = "You must enter an email and a password"
     }
+    
     
     
     //MARK: - Show Alert

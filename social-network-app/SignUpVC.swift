@@ -34,13 +34,13 @@ class SignUpVC: UIViewController {
             FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
                 if error != nil {
                     if error?.code == STATUS_ERROR_EMAIL_ALREADY_IN_USE {
-                        UtilAlerts().showAlert(self, title: "Email already exists", msg: "The email address is already in use by another account.")
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_EMAIL_ALREADY_IN_USE, msg: UtilAlerts.LoginMessages.ERROR_EMAIL_ALREADY_IN_USE)
                     } else if error?.code == STATUS_ERROR_WEAK_PASSWORD {
                         self.passwordField.text = ""
-                        UtilAlerts().showAlert(self, title: "Weak Password", msg: "The password must be 6 characters long or more.")
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WEAK_PASSWORD, msg: UtilAlerts.LoginMessages.ERROR_WEAK_PASSWORD)
                     } else {
                         print(error)
-                        UtilAlerts().showAlert(self, title: "Unknown Reason", msg: "The account cannot be created.")
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_CREATE)
                     }
                 } else {
                     //Account created
@@ -49,7 +49,7 @@ class SignUpVC: UIViewController {
                     FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (_: FIRUser?, err: NSError?) in
                         if err != nil {
                             print(err)
-                            UtilAlerts().showAlert(self, title: "Unknown Reason", msg: "The account was created but the login failed.")
+                            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_CREATE_LOGIN)
                         } else {
                             self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                         }
@@ -58,7 +58,7 @@ class SignUpVC: UIViewController {
             }
             
         } else {
-            UtilAlerts().showAlert(self, title: "Email and Password Required", msg: "You must enter an email and a password")
+            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_EMAIL_PASSWORD, msg: UtilAlerts.LoginMessages.MISSING_EMAIL_PASSWORD)
         }
        
     }
