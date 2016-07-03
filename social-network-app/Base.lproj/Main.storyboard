@@ -491,7 +491,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="SqS-kd-Utp">
                                                                     <rect key="frame" x="0.0" y="0.0" width="528" height="50"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wqa-rY-lLQ" userLabel="usersSV">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wqa-rY-lLQ" userLabel="usersSV">
                                                                             <rect key="frame" x="0.0" y="0.0" width="174" height="50"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="bki-0L-GAW">
@@ -501,8 +501,8 @@
                                                                                         <constraint firstAttribute="height" constant="50" id="FOz-9d-h6s"/>
                                                                                     </constraints>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="username1234!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ntN-HX-ftb">
-                                                                                    <rect key="frame" x="55" y="0.0" width="119" height="50"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username1234!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ntN-HX-ftb">
+                                                                                    <rect key="frame" x="55" y="15" width="119" height="21"/>
                                                                                     <fontDescription key="fontDescription" name="NotoSans-Bold" family="Noto Sans" pointSize="15"/>
                                                                                     <color key="textColor" red="0.95686274509803915" green="0.31764705882352939" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
