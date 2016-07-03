@@ -40,6 +40,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         let facebookLogin = FBSDKLoginManager()
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
             if error != nil {
+                //TODO: Error Handling
                 print("Facebook login failed!")
             } else {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
@@ -48,6 +49,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 
                 FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
                     if error != nil {
+                        //TODO: Error Handling
                         print("Login failed. \(error.debugDescription)")
                     } else {
                         print("userID: \(user?.uid)")
@@ -80,12 +82,14 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             let credential = FIRGoogleAuthProvider.credentialWithIDToken(idToken, accessToken: accessToken)
 
             FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+                //TODO: Error Handling
                 print("UserID: \(user?.uid)")
                 NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
                 self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
             }
 
         } else {
+            //TODO: Error Handling
             print("\(error.localizedDescription)")
         }
     }
@@ -104,7 +108,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
                 if error != nil {
                     if error?.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.LoginMessages.ERROR_NETWORK_REQUEST_FAILED)
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.NetworkMessages.ERROR_NETWORK_REQUEST_FAILED)
                     } else {
                         print("ERROR: \(error)")
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_LOGIN)
@@ -118,7 +122,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             }
             
         } else {
-            UtilAlerts().showAlert(self, title: "Email and Password Required", msg: "You must enter an email and a password")
+            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_EMAIL_PASSWORD, msg: UtilAlerts.GeneralMessages.MISSING_EMAIL_PASSWORD)
         }
         
     }

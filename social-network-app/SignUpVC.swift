@@ -34,15 +34,15 @@ class SignUpVC: UIViewController {
             FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
                 if error != nil {
                     if error?.code == STATUS_ERROR_EMAIL_ALREADY_IN_USE {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_EMAIL_ALREADY_IN_USE, msg: UtilAlerts.LoginMessages.ERROR_EMAIL_ALREADY_IN_USE)
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_EMAIL_ALREADY_IN_USE, msg: UtilAlerts.GeneralMessages.ERROR_EMAIL_ALREADY_IN_USE)
                     } else if error?.code == STATUS_ERROR_WEAK_PASSWORD {
                         self.passwordField.text = ""
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WEAK_PASSWORD, msg: UtilAlerts.LoginMessages.ERROR_WEAK_PASSWORD)
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WEAK_PASSWORD, msg: UtilAlerts.GeneralMessages.ERROR_WEAK_PASSWORD)
                     } else if error?.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.LoginMessages.ERROR_NETWORK_REQUEST_FAILED)
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.NetworkMessages.ERROR_NETWORK_REQUEST_FAILED)
                     } else {
                         print(error)
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_CREATE)
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.CreateAccountMessages.UNKNOWN_ERROR_CREATE)
                     }
                 } else {
                     //Account created
@@ -51,7 +51,7 @@ class SignUpVC: UIViewController {
                     FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (_: FIRUser?, err: NSError?) in
                         if err != nil {
                             print(err)
-                            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_CREATE_LOGIN)
+                            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.CreateAccountMessages.UNKNOWN_ERROR_CREATE_LOGIN)
                         } else {
                             self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                         }
@@ -60,7 +60,7 @@ class SignUpVC: UIViewController {
             }
             
         } else {
-            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_EMAIL_PASSWORD, msg: UtilAlerts.LoginMessages.MISSING_EMAIL_PASSWORD)
+            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_EMAIL_PASSWORD, msg: UtilAlerts.GeneralMessages.MISSING_EMAIL_PASSWORD)
         }
        
     }
