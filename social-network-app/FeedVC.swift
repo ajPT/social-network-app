@@ -22,6 +22,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         DataService.ds.REF_POSTS.observeEventType(.Value, withBlock: { (snapshot) in
             print(snapshot.value)
+            self.tableView.reloadData()
         })
 
     }
