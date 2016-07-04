@@ -34,7 +34,13 @@ class PostCell: UITableViewCell {
     
     //MARK: Cell Configuration
 
-//    func configureCell () {
-//    
-//    }
+    func configureCell (post: Post) {
+        //userImage.image =
+        //userName: UILabel!
+        numberOfLikes.text = String(post.likes)
+        postDescription.text = post.postDescription
+        //postImage =
+
+    }
+    
 }
