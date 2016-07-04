@@ -40,21 +40,21 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         let facebookLogin = FBSDKLoginManager()
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
             if error != nil {
-                //TODO: Error Handling
-                print("Facebook login failed!")
+                print("ERR: \(error)")
+                UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
             } else {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(accessToken)
-                print("Login successful.")
-                
                 FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
                     if error != nil {
-                        //TODO: Error Handling
-                        print("Login failed. \(error.debugDescription)")
-                    } else {
-                        print("userID: \(user?.uid)")
-                        NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
+                        print("ERRO: \(error)")
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
+                    } else if let userr = user {
+                        DataService.ds.createFirebaseUser(userr.uid, userInfo: ["provider" : userr.providerID])
+                        NSUserDefaults.standardUserDefaults().setValue(userr.uid, forKey: KEY_UID)
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                    } else {
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
                     }
                 }
                 
