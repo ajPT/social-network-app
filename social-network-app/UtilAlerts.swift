@@ -36,6 +36,7 @@ class UtilAlerts {
     }
     
     struct GeneralMessages {
+        static let UNKNOWN = "An unknown error ocurred."
         static let MISSING_EMAIL_PASSWORD = "You must enter an email and a password"
         static let ERROR_EMAIL_ALREADY_IN_USE = "The email address is already in use by another account."
         static let ERROR_WEAK_PASSWORD = "The password must be 6 characters long or more."

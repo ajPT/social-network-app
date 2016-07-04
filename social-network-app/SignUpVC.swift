@@ -45,17 +45,24 @@ class SignUpVC: UIViewController {
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.CreateAccountMessages.UNKNOWN_ERROR_CREATE)
                     }
                 } else {
-                    //Account created
-                    print(user)
-                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
-                    FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (_: FIRUser?, err: NSError?) in
-                        if err != nil {
-                            print(err)
-                            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.CreateAccountMessages.UNKNOWN_ERROR_CREATE_LOGIN)
-                        } else {
-                            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                    if let userr = user {
+                        let provider = userr.providerID
+                        let uid = userr.uid
+                        if provider != "" && uid != "" {
+                            DataService.ds.createFirebaseUser(uid, userInfo: ["provider":provider])
+                            NSUserDefaults.standardUserDefaults().setValue(uid, forKey: KEY_UID)
+                            FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (_: FIRUser?, err: NSError?) in
+                                if err != nil {
+                                    print(err)
+                                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.CreateAccountMessages.UNKNOWN_ERROR_CREATE_LOGIN)
+                                } else {
+                                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                                }
+                            })
                         }
-                    })
+                    } else {
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
+                    }
                 }
             }
             
