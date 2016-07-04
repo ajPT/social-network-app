@@ -40,14 +40,12 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         let facebookLogin = FBSDKLoginManager()
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
             if error != nil {
-                print("ERR: \(error)")
                 UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
             } else {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(accessToken)
                 FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
                     if error != nil {
-                        print("ERRO: \(error)")
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
                     } else if let userr = user {
                         DataService.ds.createFirebaseUser(userr.uid, userInfo: ["provider" : userr.providerID])
@@ -82,15 +80,20 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             let credential = FIRGoogleAuthProvider.credentialWithIDToken(idToken, accessToken: accessToken)
 
             FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-                //TODO: Error Handling
-                print("UserID: \(user?.uid)")
-                NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
-                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                if error != nil {
+                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
+                } else if let userr = user {
+                    DataService.ds.createFirebaseUser(userr.uid, userInfo: ["provider" : userr.providerID])
+                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
+                    self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                } else {
+                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
+                }
             }
 
         } else {
-            //TODO: Error Handling
-            print("\(error.localizedDescription)")
+            print("\(error)")
+            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
         }
     }
     
@@ -116,8 +119,6 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                     } else if err.code == STATUS_ERROR_WRONG_PASSWORD {
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WRONG_PASSWORD, msg: UtilAlerts.LoginMessages.ERROR_WRONG_PASSWORD)
                     } else {
-                        print("ERROR_CODE: \(err.code)")
-                        print("ERROR: \(err)")
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_LOGIN)
                     }
                 } else if user != nil {
