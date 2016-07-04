@@ -13,12 +13,17 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
-    
+
     
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+            
+        DataService.ds.REF_POSTS.observeEventType(.Value, withBlock: { (snapshot) in
+            print(snapshot.value)
+        })
+
     }
 
     //MARK: - Table View
