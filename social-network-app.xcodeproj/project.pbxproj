@@ -10,6 +10,7 @@
 		DBEF151486D7C83859D8C7AE /* Pods_social_network_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDA0E8A4E8E1B81D8A02AC7B /* Pods_social_network_app.framework */; };
 		E00238B81D294E8E00AB0D82 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00238B71D294E8E00AB0D82 /* FeedVC.swift */; };
 		E00238BA1D29524900AB0D82 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00238B91D29524900AB0D82 /* PostCell.swift */; };
+		E00238BC1D2AF9E700AB0D82 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00238BB1D2AF9E700AB0D82 /* Post.swift */; };
 		E00CAC251D2009270096B7A6 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E00CAC211D2009270096B7A6 /* NotoSans-Bold.ttf */; };
 		E00CAC261D2009270096B7A6 /* NotoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E00CAC221D2009270096B7A6 /* NotoSans-BoldItalic.ttf */; };
 		E00CAC271D2009270096B7A6 /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E00CAC231D2009270096B7A6 /* NotoSans-Italic.ttf */; };
@@ -37,6 +38,7 @@
 		429A30D9120C45BE59083673 /* Pods-social-network-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social-network-app.release.xcconfig"; path = "Pods/Target Support Files/Pods-social-network-app/Pods-social-network-app.release.xcconfig"; sourceTree = "<group>"; };
 		E00238B71D294E8E00AB0D82 /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		E00238B91D29524900AB0D82 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		E00238BB1D2AF9E700AB0D82 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		E00CAC211D2009270096B7A6 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
 		E00CAC221D2009270096B7A6 /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		E00CAC231D2009270096B7A6 /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		E00CAC2B1D200DE30096B7A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E00238BB1D2AF9E700AB0D82 /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				E0AC76CD1D28257F00396FD4 /* UtilAlerts.swift in Sources */,
 				E0AC76CB1D28234000396FD4 /* SignUpVC.swift in Sources */,
 				E00238B81D294E8E00AB0D82 /* FeedVC.swift in Sources */,
+				E00238BC1D2AF9E700AB0D82 /* Post.swift in Sources */,
 				E00CAC2D1D2017780096B7A6 /* RoundedShadowedView.swift in Sources */,
 				E0AC76C91D24379100396FD4 /* DataService.swift in Sources */,
 				E0658CAF1D1FE5E2008F488D /* InitialVC.swift in Sources */,
