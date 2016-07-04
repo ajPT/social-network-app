@@ -28,7 +28,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 //        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
-//            self.performSegueWithIdentifier(LOGGED_IN, sender: nil)
+//            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
 //        }
     }
     
@@ -105,22 +105,27 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
         if let email = emailField.text where email != "", let password = passwordField.text where password != "" {
         
-            FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
-                if error != nil {
-                    if error?.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
+            FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user: FIRUser?, error: NSError?) in
+                if let err = error {
+                    if err.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.NetworkMessages.ERROR_NETWORK_REQUEST_FAILED)
+                    } else if err.code == STATUS_ERROR_INTERNAL_ERROR {
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_INTERNAL_ERROR, msg: UtilAlerts.LoginMessages.ERROR_INTERNAL_ERROR)
+                    } else if err.code == STATUS_ERROR_USER_NOT_FOUND {
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_USER_NOT_FOUND, msg: UtilAlerts.LoginMessages.ERROR_USER_NOT_FOUND)
+                    } else if err.code == STATUS_ERROR_WRONG_PASSWORD {
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WRONG_PASSWORD, msg: UtilAlerts.LoginMessages.ERROR_WRONG_PASSWORD)
                     } else {
-                        print("ERROR: \(error)")
+                        print("ERROR_CODE: \(err.code)")
+                        print("ERROR: \(err)")
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_LOGIN)
                     }
-                } else {
-                    print("USER: \(user)")
-                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
+                } else if user != nil {
                     self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                } else {
+                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
                 }
-                
-            }
-            
+            })
         } else {
             UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_EMAIL_PASSWORD, msg: UtilAlerts.GeneralMessages.MISSING_EMAIL_PASSWORD)
         }

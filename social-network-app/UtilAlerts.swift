@@ -23,11 +23,18 @@ class UtilAlerts {
         static let MISSING_EMAIL_PASSWORD = "Email and password required"
         static let ERROR_NETWORK_REQUEST_FAILED = "No network connection"
         static let UNKNOWN = "Unknown reason"
+        static let ERROR_WRONG_PASSWORD = "Wrong password"
+        static let ERROR_USER_NOT_FOUND = "Wrong user"
+        static let ERROR_INTERNAL_ERROR = "Email is not valid"
+
     }
     
     //MARK: Login
     struct LoginMessages {
         static let UNKNOWN_ERROR_LOGIN = "Login failed."
+        static let ERROR_WRONG_PASSWORD = "Please check your password."
+        static let ERROR_USER_NOT_FOUND = "The email does not exists."
+        static let ERROR_INTERNAL_ERROR = "Please insert a valid email."
     }
     
     struct CreateAccountMessages {
