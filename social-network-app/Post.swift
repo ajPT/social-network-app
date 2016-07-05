@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 class Post {
 
@@ -18,7 +17,6 @@ class Post {
     private var _likes: Int!
     private var _username: String!
     private var _postKey: String?
-    var request: Request?
     
     //MARK: - Getters/Setters
 
