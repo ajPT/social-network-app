@@ -14,6 +14,7 @@ class PostCell: UITableViewCell {
     //MARK: - Properties
     var request: Request?
     
+    
     //MARK: - IBOutlets
     
     @IBOutlet weak var userImage: UIImageView!
