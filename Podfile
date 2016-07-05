@@ -10,5 +10,6 @@ target 'social-network-app' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Google/SignIn'
+  pod 'Alamofire', '~> 3.4'
 
 end

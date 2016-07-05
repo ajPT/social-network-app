@@ -12,6 +12,7 @@ import Firebase
 class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Properties
+    static var cache = NSCache()
     var posts = [Post]()
     
     
@@ -24,6 +25,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 365
         
         DataService.ds.REF_POSTS.observeEventType(.Value, withBlock: { (snapshot) in
             
@@ -54,12 +56,24 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as? PostCell {
             let post = posts[indexPath.row]
-            cell.configureCell(post)
+            //cell.request?.cancel()
+            var img: UIImage?
+            if let imgUrl = post.postImageUrl {
+                img = FeedVC.cache.objectForKey(imgUrl) as? UIImage
+            }
+            cell.configureCell(post, img: img)
             return cell
         } else {
             return PostCell()
         }
-        
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let post = posts[indexPath.row]
+        if post.postImageUrl == nil {
+            return 170
+        }
+        return tableView.estimatedRowHeight
     }
     
 

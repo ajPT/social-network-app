@@ -475,7 +475,7 @@
                                 <rect key="frame" x="20" y="64" width="560" height="672"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="365" id="VZb-Yq-siz" customClass="PostCell" customModule="social_network_app" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" id="VZb-Yq-siz" customClass="PostCell" customModule="social_network_app" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="560" height="365"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VZb-Yq-siz" id="uZ4-Sf-qs4">

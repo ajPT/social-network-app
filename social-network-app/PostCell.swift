@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import Alamofire
 
 class PostCell: UITableViewCell {
 
-    //MARK: IBOutlets
+    //MARK: - Properties
+    var request: Request?
+    
+    //MARK: - IBOutlets
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
@@ -19,7 +23,7 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var postImage: UIImageView!
     
     
-    //MARK: Cell Initialization
+    //MARK: - Cell Initialization
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,15 +36,31 @@ class PostCell: UITableViewCell {
     }
     
     
-    //MARK: Cell Configuration
+    //MARK: - Cell Configuration
 
-    func configureCell (post: Post) {
+    func configureCell (post: Post, img: UIImage?) {
         //userImage.image =
-        //userName: UILabel!
+        //userName.text =
         numberOfLikes.text = "\(post.likes)"
         postDescription.text = post.postDescription
-        //postImage =
-
+        
+        if img != nil {
+            postImage.image = img
+        } else if let imgUrl = post.postImageUrl {
+            request = Alamofire.request(.GET, imgUrl).validate(contentType: ["image/*"]).response(completionHandler: { (request: NSURLRequest?, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) in
+                
+                if error == nil {
+                    if let imgData = data {
+                        let img = UIImage(data: imgData)
+                        FeedVC.cache.setObject(img!, forKey: imgUrl)
+                        self.postImage.image = img
+                    }
+                }
+            })
+        } else {
+            postImage.hidden = true
+        }
+        
     }
     
 }
