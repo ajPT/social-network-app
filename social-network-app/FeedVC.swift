@@ -9,12 +9,12 @@
 import UIKit
 import Firebase
 
-class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: - Properties
     static var cache = NSCache()
     var posts = [Post]()
-    
+    var imagePicker: UIImagePickerController!
     
     //MARK: - IBOutlets
     
@@ -26,6 +26,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 365
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         
         DataService.ds.REF_POSTS.observeEventType(.Value, withBlock: { (snapshot) in
             
@@ -76,5 +78,23 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return tableView.estimatedRowHeight
     }
     
+    //MARK: - Aux
+    
+//    func addCenas() {
+//        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+//            imagePicker.sourceType = .PhotoLibrary
+//            imagePicker.allowsEditing = false
+//            if let availableMediaTypes = UIImagePickerController.availableMediaTypesForSourceType(.PhotoLibrary) {
+//                imagePicker.mediaTypes = availableMediaTypes
+//            }
+//            presentViewController(imagePicker, animated: true, completion: nil)
+//        }
+//    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        //update stuff
+    }
+
 
 }
