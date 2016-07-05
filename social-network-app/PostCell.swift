@@ -37,7 +37,7 @@ class PostCell: UITableViewCell {
     func configureCell (post: Post) {
         //userImage.image =
         //userName: UILabel!
-        numberOfLikes.text = String(post.likes)
+        numberOfLikes.text = "\(post.likes)"
         postDescription.text = post.postDescription
         //postImage =
 
