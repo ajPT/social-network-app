@@ -485,12 +485,16 @@
                                                 <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="Kh6-aX-jQs">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="Kh6-aX-jQs">
                                                 <rect key="frame" x="447" y="0.0" width="37" height="37"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="c7a-SW-KmF"/>
                                                     <constraint firstAttribute="width" constant="37" id="qF9-qU-HiR"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="3Js-23-tSt" appends="YES" id="Pey-qJ-bU0"/>
+                                                </connections>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpv-zI-OmX" customClass="RoundedShadowedBtn" customModule="social_network_app" customModuleProvider="target">
                                                 <rect key="frame" x="494" y="0.0" width="50" height="37"/>
@@ -502,6 +506,9 @@
                                                 <state key="normal" title="POST">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onPostBtnPressed:" destination="D45-Nm-vvc" eventType="touchUpInside" id="IZ3-aq-SGD"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -659,10 +666,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="jYH-Qe-acg"/>
                     <connections>
+                        <outlet property="cameraImg" destination="Kh6-aX-jQs" id="8va-n3-I96"/>
+                        <outlet property="descriptionField" destination="PHb-wW-CL5" id="7u7-a6-qcI"/>
                         <outlet property="tableView" destination="prJ-w6-yJG" id="aPM-UZ-tVC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1M-Zc-sJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="3Js-23-tSt">
+                    <connections>
+                        <action selector="onCameraPressed:" destination="D45-Nm-vvc" id="mug-Es-yKT"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1792" y="293"/>
         </scene>

@@ -19,6 +19,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     //MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cameraImg: UIImageView!
+    @IBOutlet weak var descriptionField: RoundedBorderedTextField!
 
     
     //MARK: - View Life Cycle
@@ -78,22 +80,37 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         return tableView.estimatedRowHeight
     }
     
-    //MARK: - Aux
     
-//    func addCenas() {
-//        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
-//            imagePicker.sourceType = .PhotoLibrary
-//            imagePicker.allowsEditing = false
-//            if let availableMediaTypes = UIImagePickerController.availableMediaTypesForSourceType(.PhotoLibrary) {
-//                imagePicker.mediaTypes = availableMediaTypes
-//            }
-//            presentViewController(imagePicker, animated: true, completion: nil)
+    //MARK: - IBActions
+    
+    @IBAction func onCameraPressed(sender: UITapGestureRecognizer) {
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            imagePicker.sourceType = .PhotoLibrary
+            imagePicker.allowsEditing = false
+            if let availableMediaTypes = UIImagePickerController.availableMediaTypesForSourceType(.PhotoLibrary) {
+                    imagePicker.mediaTypes = availableMediaTypes
+                }
+            presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    
+    @IBAction func onPostBtnPressed(sender: RoundedShadowedBtn) {
+//        if let desc = descriptionField.text where desc != "" {
+//        
 //        }
-//    }
+        
+    }
+    
+    
+    //MARK: - Aux
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
-        //update stuff
+        print(info)
+        if let img = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            cameraImg.image = img
+        }
     }
 
 
