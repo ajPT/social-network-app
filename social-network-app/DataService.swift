@@ -31,5 +31,9 @@ class DataService {
         REF_USERS.child(uid).setValue(userInfo)
     }
 
+    func createFirebasePostWithAutoID(postInfo: [String: AnyObject]) {
+        let autoIDPost = REF_POSTS.childByAutoId()
+        autoIDPost.setValue(postInfo)
+    }
     
 }
