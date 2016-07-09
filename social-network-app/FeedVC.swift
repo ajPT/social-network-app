@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -96,10 +97,47 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     
     @IBAction func onPostBtnPressed(sender: RoundedShadowedBtn) {
-//        if let desc = descriptionField.text where desc != "" {
-//        
-//        }
-        
+        if let desc = descriptionField.text where desc != "" {
+            if let img = cameraImg.image {
+                let urlStr = "https://post.imageshack.us/upload_api.php"
+                let url = NSURL(string: urlStr)
+                let imageShackKey = "12DJKPSU5fc3afbd01b1630cc718cae3043220f3".dataUsingEncoding(NSUTF8StringEncoding)
+                let jpegImg = UIImageJPEGRepresentation(img, 0.2)
+                let format = "json".dataUsingEncoding(NSUTF8StringEncoding)
+                
+                if let myUrl = url {
+
+                    Alamofire.upload(.POST, myUrl, multipartFormData: { multipartFormData in
+                        if let keyData = imageShackKey, let imgData = jpegImg, let formatData = format {
+                            multipartFormData.appendBodyPart(data: keyData, name: "key")
+                            multipartFormData.appendBodyPart(data: imgData, name: "fileupload", fileName: "image", mimeType: "image/jpeg")
+                            multipartFormData.appendBodyPart(data: formatData, name: "format")
+                        }
+                        },
+                        encodingCompletion: { encodingResult in
+                            switch encodingResult {
+                            case .Success(let upload, _, _):
+                                upload.responseJSON { response in
+                                    if let resultJSON = response.result.value as? [String:AnyObject] {
+                                        if let linksDict = resultJSON["links"] as? [String:AnyObject] {
+                                            if let link = linksDict["image_link"] as? String {
+                                                print("LINK: \(link)")
+                                            }
+                                        }
+                                    }
+                                }
+                            case .Failure(let encodingError):
+                                print(encodingError)
+                            }
+                        }
+                    )
+
+                    
+                }
+            }
+        } else {
+            //TODO: Add Alert "You must insert ..."
+        }
     }
     
     
@@ -107,7 +145,6 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
-        print(info)
         if let img = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             cameraImg.image = img
         }
