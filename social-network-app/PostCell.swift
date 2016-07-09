@@ -50,13 +50,15 @@ class PostCell: UITableViewCell {
         postDescription.text = post.postDescription
         
         currentUserLikeRef = DataService.ds.REF_CURRENT_USER_LIKES.child(post.postKey)
-        postImage.hidden = false
+
         if img != nil {
+            postImage.hidden = false
             postImage.image = img
         } else if let imgUrl = post.postImageUrl {
             request = Alamofire.request(.GET, imgUrl).validate(contentType: ["image/*"]).response(completionHandler: { (request: NSURLRequest?, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) in
                 if error == nil {
                     if let imgData = data {
+                        self.postImage.hidden = false
                         let img = UIImage(data: imgData)
                         FeedVC.cache.setObject(img!, forKey: imgUrl)
                         self.postImage.image = img
