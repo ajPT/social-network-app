@@ -92,8 +92,12 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
         if (error == nil) {
-            //let userId = user.userID
-            //let email = user.profile.email
+            let fullName = user.profile.name
+            let email = user.profile.email
+            let img = user.profile.imageURLWithDimension(100)
+            
+            // * WIP *
+
             let idToken = user.authentication.idToken
             let accessToken = user.authentication.accessToken
             let credential = FIRGoogleAuthProvider.credentialWithIDToken(idToken, accessToken: accessToken)
@@ -101,8 +105,13 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
                 if error != nil {
                     UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
-                } else if let userr = user {
-                    DataService.ds.createFirebaseUser(userr.uid, userInfo: ["provider" : userr.providerID])
+                } else if let googleUser = user {
+                    var userInformation: [String: AnyObject] = [
+                        "username": fullName,
+                        "email": email
+                    ]
+                    
+                    DataService.ds.createFirebaseUser(googleUser.uid, userInfo: userInformation)
                     NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
                     self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                 } else {
