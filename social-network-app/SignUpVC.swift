@@ -80,6 +80,8 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                                                     if let linksDict = resultJSON["links"] as? [String:AnyObject] {
                                                         if let link = linksDict["image_link"] as? String {
                                                             userInformation["photo"] = link
+                                                            DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
+                                                            NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
                                                         }
                                                     }
                                                 }
@@ -91,10 +93,10 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                                 )
                                 
                             }
+                        } else {
+                            DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
+                            NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
                         }
-                        
-                        DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
-                        NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
                         
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                     } else {
