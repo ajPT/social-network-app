@@ -66,4 +66,15 @@ class Post {
         }
     }
     
+    
+    //MARK: - Functions
+    
+    func increaseNrLikes() {
+        _likes = _likes + 1
+    }
+    
+    func decreaseNrLikes() {
+        _likes = _likes - 1
+    }
+    
 }
