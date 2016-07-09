@@ -385,19 +385,61 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBY-L6-fkj" userLabel="emailView" customClass="RoundedShadowedView" customModule="social_network_app" customModuleProvider="target">
                                 <rect key="frame" x="20" y="194" width="560" height="522"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XnR-Il-gcJ">
-                                        <rect key="frame" x="10" y="101" width="540" height="125"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dEy-PX-ecR" userLabel="signUpSV">
+                                        <rect key="frame" x="225" y="301" width="110" height="30"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yip-8e-MjF" customClass="RoundedBorderedTextField" customModule="social_network_app" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="540" height="35"/>
-                                                <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ee-Vs-1YO" customClass="RoundedShadowedBtn" customModule="social_network_app" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="30"/>
+                                                <color key="backgroundColor" red="0.95686274510000002" green="0.31764705879999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="1MU-ZY-1NW"/>
+                                                    <constraint firstAttribute="height" constant="30" id="4G8-Xz-Yzu"/>
+                                                    <constraint firstAttribute="width" constant="110" id="Uce-8V-ugi"/>
                                                 </constraints>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <fontDescription key="fontDescription" name="NotoSans-Bold" family="Noto Sans" pointSize="15"/>
+                                                <state key="normal" title="SIGN UP">
+                                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onLoginBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="802-lv-drd"/>
+                                                    <action selector="onSignUpBtnPressed:" destination="vxg-on-3NI" eventType="touchUpInside" id="4J8-WX-s7Q"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XnR-Il-gcJ" userLabel="infosSV">
+                                        <rect key="frame" x="10" y="146" width="540" height="125"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="88Q-ES-LDk">
+                                                <rect key="frame" x="0.0" y="0.0" width="540" height="35"/>
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yip-8e-MjF" customClass="RoundedBorderedTextField" customModule="social_network_app" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="495" height="35"/>
+                                                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="1MU-ZY-1NW"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TK2-Oa-k5V">
+                                                        <rect key="frame" x="505" y="0.0" width="35" height="35"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvv-Bx-GDO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="35" id="CYH-4S-oiH"/>
+                                                                    <constraint firstAttribute="width" constant="35" id="E0x-Qr-Yaw"/>
+                                                                </constraints>
+                                                                <state key="normal" image="add"/>
+                                                                <connections>
+                                                                    <action selector="onAddPicBtnPressed:" destination="vxg-on-3NI" eventType="touchUpInside" id="cAe-Bn-YL6"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sBU-dV-dpd" customClass="RoundedBorderedTextField" customModule="social_network_app" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="45" width="540" height="35"/>
                                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -420,31 +462,15 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ee-Vs-1YO" customClass="RoundedShadowedBtn" customModule="social_network_app" customModuleProvider="target">
-                                        <rect key="frame" x="225" y="251" width="110" height="30"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.31764705879999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="4G8-Xz-Yzu"/>
-                                            <constraint firstAttribute="width" constant="110" id="Uce-8V-ugi"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="NotoSans-Bold" family="Noto Sans" pointSize="15"/>
-                                        <state key="normal" title="SIGN UP">
-                                            <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onLoginBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="802-lv-drd"/>
-                                            <action selector="onSignUpBtnPressed:" destination="vxg-on-3NI" eventType="touchUpInside" id="4J8-WX-s7Q"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="dEy-PX-ecR" firstAttribute="centerX" secondItem="mBY-L6-fkj" secondAttribute="centerX" id="0M0-LA-3wY"/>
+                                    <constraint firstItem="dEy-PX-ecR" firstAttribute="top" secondItem="XnR-Il-gcJ" secondAttribute="bottom" constant="30" id="LaM-hv-sAy"/>
                                     <constraint firstItem="XnR-Il-gcJ" firstAttribute="leading" secondItem="mBY-L6-fkj" secondAttribute="leading" constant="10" id="Nyt-3g-6yb"/>
-                                    <constraint firstItem="3ee-Vs-1YO" firstAttribute="centerY" secondItem="mBY-L6-fkj" secondAttribute="centerY" constant="5" id="QvV-d7-nwd"/>
                                     <constraint firstAttribute="trailing" secondItem="XnR-Il-gcJ" secondAttribute="trailing" constant="10" id="aHT-GS-7iE"/>
-                                    <constraint firstItem="3ee-Vs-1YO" firstAttribute="top" secondItem="XnR-Il-gcJ" secondAttribute="bottom" constant="25" id="bHR-TX-Dco"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="240" id="rFc-e2-SVN"/>
-                                    <constraint firstItem="3ee-Vs-1YO" firstAttribute="centerX" secondItem="mBY-L6-fkj" secondAttribute="centerX" id="xC5-HT-E1t"/>
+                                    <constraint firstItem="dEy-PX-ecR" firstAttribute="centerY" secondItem="mBY-L6-fkj" secondAttribute="centerY" constant="55" id="xKc-sB-fld"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -717,6 +743,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add" width="256" height="256"/>
         <image name="camera" width="50" height="50"/>
         <image name="facebook" width="256" height="256"/>
         <image name="google" width="256" height="256"/>

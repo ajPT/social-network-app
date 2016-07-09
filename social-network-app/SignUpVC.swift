@@ -9,7 +9,10 @@
 import UIKit
 import Firebase
 
-class SignUpVC: UIViewController {
+class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    //MARK: - Properties
+    var imagePicker: UIImagePickerController!
 
     //MARK: - IBOutlets
     
@@ -22,6 +25,8 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
     }
 
     
@@ -47,8 +52,15 @@ class SignUpVC: UIViewController {
                     }
                 } else if let firebaseUser = user {
                     if firebaseUser.uid != "" {
-                        DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: ["username":username])
+                        
+                        let userInformation: [String: AnyObject] = [
+                            "username": username,
+                            "email": email
+                        ]
+                        
+                        DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
                         NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
+                        
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                     } else {
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
@@ -68,5 +80,19 @@ class SignUpVC: UIViewController {
     @IBAction func onCancelBtnPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
+    //MARK: Image Picker
+    @IBAction func onAddPicBtnPressed(sender: UIButton) {
+    
+    }
+    
+    //MARK - Aux
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+    }
+    
+    
 
 }
