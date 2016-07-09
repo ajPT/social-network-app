@@ -589,6 +589,9 @@
                                                                                         <constraint firstAttribute="width" constant="35" id="dPo-7X-w4b"/>
                                                                                     </constraints>
                                                                                     <state key="normal" image="heart-full"/>
+                                                                                    <connections>
+                                                                                        <action selector="onLikeBtnPressed:" destination="VZb-Yq-siz" eventType="touchUpInside" id="dDa-wU-SKQ"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                             </subviews>
                                                                         </stackView>

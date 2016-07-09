@@ -69,7 +69,7 @@ class PostCell: UITableViewCell {
         
         likeRef.observeSingleEventOfType(.Value, andPreviousSiblingKeyWithBlock: { (snapshot: FIRDataSnapshot, _) in
             
-            if let doesNotExist = snapshot.value as? NSNull {
+            if let _ = snapshot.value as? NSNull {
                 let emptyHeartImg = UIImage(named: "heart-empty")!
                 self.likeBtn.setImage(emptyHeartImg, forState: .Normal)
             } else {
@@ -80,6 +80,13 @@ class PostCell: UITableViewCell {
             print(error)
         }
         
+    }
+    
+    
+    //MARK: - IBActions
+    
+    @IBAction func onLikeBtnPressed(sender: UIButton) {
+    
     }
     
 }
