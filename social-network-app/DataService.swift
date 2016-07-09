@@ -30,5 +30,6 @@ class DataService {
     func createFirebaseUser(uid: String, userInfo: [String: String]) {
         REF_USERS.child(uid).setValue(userInfo)
     }
+
     
 }

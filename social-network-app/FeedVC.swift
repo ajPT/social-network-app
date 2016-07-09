@@ -122,7 +122,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                                     if let resultJSON = response.result.value as? [String:AnyObject] {
                                         if let linksDict = resultJSON["links"] as? [String:AnyObject] {
                                             if let link = linksDict["image_link"] as? String {
-                                                print("LINK: \(link)")
+                                                self.postToFirebase(link)
                                             }
                                         }
                                     }
@@ -136,7 +136,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                     
                 }
             } else {
-                //TODO: post without image
+                self.postToFirebase(nil)
             }
         } else {
             //TODO: Add Alert "You must insert ..."
@@ -152,6 +152,24 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             cameraImg.image = img
             imageSelected = true
         }
+    }
+    
+    func postToFirebase(imgUrl: String?) {
+        var postDict: [String:AnyObject] = [
+            "description" : descriptionField.text!,
+            "likes" : 0
+        ]
+        if let imageURL = imgUrl {
+            postDict["image"] = imageURL
+        }
+        let firebasePost = DataService.ds.REF_POSTS.childByAutoId()
+        firebasePost.setValue(postDict)
+        
+        descriptionField.text = ""
+        cameraImg.image = UIImage(named: "camera")
+        imageSelected = false
+        
+        tableView.reloadData()
     }
 
 
