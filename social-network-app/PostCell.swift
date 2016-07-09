@@ -14,7 +14,8 @@ class PostCell: UITableViewCell {
 
     //MARK: - Properties
     var request: Request?
-    
+    var currentUserLikeRef: FIRDatabaseReference!
+    var post: Post!
     
     //MARK: - IBOutlets
     
@@ -42,10 +43,13 @@ class PostCell: UITableViewCell {
     //MARK: - Cell Configuration
 
     func configureCell (post: Post, img: UIImage?) {
+        self.post = post
         //userImage.image =
         //userName.text =
         numberOfLikes.text = "\(post.likes)"
         postDescription.text = post.postDescription
+        
+        currentUserLikeRef = DataService.ds.REF_CURRENT_USER_LIKES.child(post.postKey)
         
         if img != nil {
             postImage.image = img
@@ -65,16 +69,11 @@ class PostCell: UITableViewCell {
         }
         
         //like button
-        let likeRef = DataService.ds.REF_CURRENT_USER_LIKES.child(post.postKey)
-        
-        likeRef.observeSingleEventOfType(.Value, andPreviousSiblingKeyWithBlock: { (snapshot: FIRDataSnapshot, _) in
-            
+        currentUserLikeRef.observeSingleEventOfType(.Value, andPreviousSiblingKeyWithBlock: { (snapshot: FIRDataSnapshot, _) in
             if let _ = snapshot.value as? NSNull {
-                let emptyHeartImg = UIImage(named: "heart-empty")!
-                self.likeBtn.setImage(emptyHeartImg, forState: .Normal)
+                self.setHeartImages("heart-empty")
             } else {
-                let fullHeartImg = UIImage(named: "heart-full")!
-                self.likeBtn.setImage(fullHeartImg, forState: .Normal)
+                self.setHeartImages("heart-full")
             }
         }) { (error: NSError) in
             print(error)
@@ -86,7 +85,26 @@ class PostCell: UITableViewCell {
     //MARK: - IBActions
     
     @IBAction func onLikeBtnPressed(sender: UIButton) {
+        currentUserLikeRef.observeSingleEventOfType(.Value, andPreviousSiblingKeyWithBlock: { (snapshot: FIRDataSnapshot, _) in
+            if let _ = snapshot.value as? NSNull {
+                self.setHeartImages("heart-full")
+                self.post.increaseNrLikes()
+                self.currentUserLikeRef.setValue(true)
+            } else {
+                self.setHeartImages("heart-empty")
+                self.post.decreaseNrLikes()
+                self.currentUserLikeRef.removeValue()
+            }
+        }) { (error: NSError) in
+            print(error)
+        }
+    }
     
+    //MARK: - Aux
+    
+    func setHeartImages(imgName: String) {
+        let img = UIImage(named: imgName)
+        likeBtn.setImage(img, forState: .Normal)
     }
     
 }
