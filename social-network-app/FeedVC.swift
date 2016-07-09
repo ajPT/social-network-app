@@ -101,7 +101,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             if let img = cameraImg.image {
                 let urlStr = "https://post.imageshack.us/upload_api.php"
                 let url = NSURL(string: urlStr)
-                let imageShackKey = "12DJKPSU5fc3afbd01b1630cc718cae3043220f3".dataUsingEncoding(NSUTF8StringEncoding)
+                let imageShackKey = "FM9SLZ32ecfa8ec22d067d1ab43452c99b35e43d".dataUsingEncoding(NSUTF8StringEncoding)
                 let jpegImg = UIImageJPEGRepresentation(img, 0.2)
                 let format = "json".dataUsingEncoding(NSUTF8StringEncoding)
                 
