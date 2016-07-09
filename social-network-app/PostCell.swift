@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Firebase
 
 class PostCell: UITableViewCell {
 
@@ -22,6 +23,7 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var numberOfLikes: UILabel!
     @IBOutlet weak var postDescription: UITextView!
     @IBOutlet weak var postImage: UIImageView!
+    @IBOutlet weak var likeBtn: UIButton!
     
     
     //MARK: - Cell Initialization
@@ -60,6 +62,22 @@ class PostCell: UITableViewCell {
             })
         } else {
             postImage.hidden = true
+        }
+        
+        //like button
+        let likeRef = DataService.ds.REF_CURRENT_USER_LIKES.child(post.postKey)
+        
+        likeRef.observeSingleEventOfType(.Value, andPreviousSiblingKeyWithBlock: { (snapshot: FIRDataSnapshot, _) in
+            
+            if let doesNotExist = snapshot.value as? NSNull {
+                let emptyHeartImg = UIImage(named: "heart-empty")!
+                self.likeBtn.setImage(emptyHeartImg, forState: .Normal)
+            } else {
+                let fullHeartImg = UIImage(named: "heart-full")!
+                self.likeBtn.setImage(fullHeartImg, forState: .Normal)
+            }
+        }) { (error: NSError) in
+            print(error)
         }
         
     }

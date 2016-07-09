@@ -16,7 +16,7 @@ class Post {
     private var _postImageUrl: String?
     private var _likes: Int!
     private var _username: String!
-    private var _postKey: String?
+    private var _postKey: String!
     
     //MARK: - Getters/Setters
 
@@ -36,7 +36,7 @@ class Post {
         return _username
     }
     
-    var postKey: String? {
+    var postKey: String {
         return _postKey
     }
     
