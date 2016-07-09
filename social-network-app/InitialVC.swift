@@ -38,7 +38,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     //MARK: Facebook Login
     @IBAction func onFacebookBtnPressed(sender: UIButton) {
         let facebookLogin = FBSDKLoginManager()
-        facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
+        facebookLogin.logInWithReadPermissions(["public_profile", "email"], fromViewController: self) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) in
             if error != nil {
                 UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
             } else {
@@ -47,9 +47,28 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
                     if error != nil {
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
-                    } else if let userr = user {
-                        DataService.ds.createFirebaseUser(userr.uid, userInfo: ["provider" : userr.providerID])
-                        NSUserDefaults.standardUserDefaults().setValue(userr.uid, forKey: KEY_UID)
+                    } else if let facebookUser = user {
+                        
+                        let uid = facebookUser.uid
+                        
+                        var userInformation = [String: AnyObject]()
+                        
+                        if let email = facebookUser.email {
+                            userInformation["email"] = email
+                        }
+                        if let photoUrl = facebookUser.photoURL {
+                            let urlStr = String(photoUrl)
+                            userInformation["photo"] = urlStr
+                        }
+                        if let username = facebookUser.displayName {
+                            //let name = username.stringByReplacingOccurrencesOfString(" ", withString: "")
+                            //userInformation["username"] = name
+                            userInformation["username"] = username
+                        }
+                        
+                        DataService.ds.createFirebaseUser(uid, userInfo: userInformation)
+                        NSUserDefaults.standardUserDefaults().setValue(uid, forKey: KEY_UID)
+                        
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                     } else {
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
