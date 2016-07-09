@@ -13,6 +13,7 @@ class SignUpVC: UIViewController {
 
     //MARK: - IBOutlets
     
+    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -29,7 +30,7 @@ class SignUpVC: UIViewController {
     //MARK: Create Account
     @IBAction func onSignUpBtnPressed(sender: UIButton) {
         
-        if let email = emailField.text where email != "", let password = passwordField.text where password != "" {
+        if let username = usernameField.text where username != "", let email = emailField.text where email != "", let password = passwordField.text where password != "" {
             
             FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
                 if let err = error {
@@ -44,10 +45,10 @@ class SignUpVC: UIViewController {
                         print(err)
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.CreateAccountMessages.UNKNOWN_ERROR_CREATE)
                     }
-                } else if let userr = user {
-                    if userr.providerID != "" && userr.uid != "" {
-                        DataService.ds.createFirebaseUser(userr.uid, userInfo: ["provider":userr.providerID])
-                        NSUserDefaults.standardUserDefaults().setValue(userr.uid, forKey: KEY_UID)
+                } else if let firebaseUser = user {
+                    if firebaseUser.uid != "" {
+                        DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: ["username":username])
+                        NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                     } else {
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
@@ -57,7 +58,7 @@ class SignUpVC: UIViewController {
                 }
             }
         } else {
-            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_EMAIL_PASSWORD, msg: UtilAlerts.GeneralMessages.MISSING_EMAIL_PASSWORD)
+            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_FIELDS, msg: UtilAlerts.GeneralMessages.MISSING_FIELDS)
         }
        
     }

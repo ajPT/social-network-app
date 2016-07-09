@@ -27,9 +27,9 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
-            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
-        }
+//        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
+//            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+//        }
     }
     
     
@@ -128,7 +128,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 }
             })
         } else {
-            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_EMAIL_PASSWORD, msg: UtilAlerts.GeneralMessages.MISSING_EMAIL_PASSWORD)
+            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_EMAIL_PASSWORD, msg: UtilAlerts.LoginMessages.MISSING_EMAIL_PASSWORD)
         }
         
     }

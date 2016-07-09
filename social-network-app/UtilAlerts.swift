@@ -26,7 +26,7 @@ class UtilAlerts {
         static let ERROR_WRONG_PASSWORD = "Wrong password"
         static let ERROR_USER_NOT_FOUND = "Wrong user"
         static let ERROR_INTERNAL_ERROR = "Email is not valid"
-
+        static let MISSING_FIELDS = "All fields are required"
     }
     
     //MARK: Login
@@ -35,6 +35,7 @@ class UtilAlerts {
         static let ERROR_WRONG_PASSWORD = "Please check your password."
         static let ERROR_USER_NOT_FOUND = "The email does not exists."
         static let ERROR_INTERNAL_ERROR = "Please insert a valid email."
+        static let MISSING_EMAIL_PASSWORD = "You must enter an email and a password"
     }
     
     struct CreateAccountMessages {
@@ -44,7 +45,7 @@ class UtilAlerts {
     
     struct GeneralMessages {
         static let UNKNOWN = "An unknown error ocurred."
-        static let MISSING_EMAIL_PASSWORD = "You must enter an email and a password"
+        static let MISSING_FIELDS = "You must enter all fields."
         static let ERROR_EMAIL_ALREADY_IN_USE = "The email address is already in use by another account."
         static let ERROR_WEAK_PASSWORD = "The password must be 6 characters long or more."
     }
