@@ -16,6 +16,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     static var cache = NSCache()
     var posts = [Post]()
     var imagePicker: UIImagePickerController!
+    var imageSelected = false
     
     //MARK: - IBOutlets
     
@@ -98,7 +99,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     @IBAction func onPostBtnPressed(sender: RoundedShadowedBtn) {
         if let desc = descriptionField.text where desc != "" {
-            if let img = cameraImg.image {
+            if let img = cameraImg.image where imageSelected == true {
                 let urlStr = "https://post.imageshack.us/upload_api.php"
                 let url = NSURL(string: urlStr)
                 let imageShackKey = "FM9SLZ32ecfa8ec22d067d1ab43452c99b35e43d".dataUsingEncoding(NSUTF8StringEncoding)
@@ -147,6 +148,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
         if let img = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             cameraImg.image = img
+            imageSelected = true
         }
     }
 
