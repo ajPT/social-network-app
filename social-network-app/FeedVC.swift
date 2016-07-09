@@ -135,6 +135,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
 
                     
                 }
+            } else {
+                //TODO: post without image
             }
         } else {
             //TODO: Add Alert "You must insert ..."
