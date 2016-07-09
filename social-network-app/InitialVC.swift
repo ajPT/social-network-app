@@ -113,10 +113,9 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                         userInformation["photo"] = imgUrl
                     }
                     
-                    // * WIP *
-                    
                     DataService.ds.createFirebaseUser(googleUser.uid, userInfo: userInformation)
                     NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
+                    
                     self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                 } else {
                     UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
