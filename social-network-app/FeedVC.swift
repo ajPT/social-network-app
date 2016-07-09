@@ -100,9 +100,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     @IBAction func onPostBtnPressed(sender: RoundedShadowedBtn) {
         if let desc = descriptionField.text where desc != "" {
             if let img = cameraImg.image where imageSelected == true {
-                let urlStr = "https://post.imageshack.us/upload_api.php"
-                let url = NSURL(string: urlStr)
-                let imageShackKey = "FM9SLZ32ecfa8ec22d067d1ab43452c99b35e43d".dataUsingEncoding(NSUTF8StringEncoding)
+                let url = NSURL(string: URL_UPLOAD)
+                let imageShackKey = KEY_IMAGESHACK.dataUsingEncoding(NSUTF8StringEncoding)
                 let jpegImg = UIImageJPEGRepresentation(img, 0.2)
                 let format = "json".dataUsingEncoding(NSUTF8StringEncoding)
                 

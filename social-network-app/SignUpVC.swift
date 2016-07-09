@@ -8,18 +8,20 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: - Properties
     var imagePicker: UIImagePickerController!
+    var userImage: UIImage?
 
     //MARK: - IBOutlets
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    
+    @IBOutlet weak var userPic: UIButton!
     
     //MARK: - View Life Cycle
     
@@ -53,10 +55,43 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 } else if let firebaseUser = user {
                     if firebaseUser.uid != "" {
                         
-                        let userInformation: [String: AnyObject] = [
+                        var userInformation: [String: AnyObject] = [
                             "username": username,
                             "email": email
                         ]
+                        
+                        if self.userImage != nil {
+                            let img = UIImageJPEGRepresentation(self.userImage!, 0.2)
+                            let url = NSURL(string: URL_UPLOAD)
+                            let imageShackKey = KEY_IMAGESHACK.dataUsingEncoding(NSUTF8StringEncoding)
+                            let format = "json".dataUsingEncoding(NSUTF8StringEncoding)
+
+                            if let uploadUrl = url, let imgData = img, let keyData = imageShackKey, let formatData = format {
+                                Alamofire.upload(.POST, uploadUrl, multipartFormData: { multipartFormData in
+                                    multipartFormData.appendBodyPart(data: keyData, name: "key")
+                                    multipartFormData.appendBodyPart(data: imgData, name: "fileupload", fileName: "image", mimeType: "image/jpg")
+                                    multipartFormData.appendBodyPart(data: formatData, name: "format")
+                                    },
+                                    encodingCompletion: { encodingResult in
+                                        switch encodingResult {
+                                        case .Success(let upload, _, _):
+                                            upload.responseJSON { response in
+                                                if let resultJSON = response.result.value as? [String:AnyObject] {
+                                                    if let linksDict = resultJSON["links"] as? [String:AnyObject] {
+                                                        if let link = linksDict["image_link"] as? String {
+                                                            userInformation["photo"] = link
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        case .Failure(let encodingError):
+                                            print(encodingError)
+                                        }
+                                    }
+                                )
+                                
+                            }
+                        }
                         
                         DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
                         NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
@@ -84,12 +119,26 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     //MARK: Image Picker
     @IBAction func onAddPicBtnPressed(sender: UIButton) {
-    
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            imagePicker.sourceType = .PhotoLibrary
+            imagePicker.allowsEditing = false
+            if let availableMediaTypes = UIImagePickerController.availableMediaTypesForSourceType(.PhotoLibrary) {
+                imagePicker.mediaTypes = availableMediaTypes
+            }
+            presentViewController(imagePicker, animated: true, completion: nil)
+        }
     }
+    
     
     //MARK - Aux
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        dismissViewControllerAnimated(true, completion: nil)
+        if let img = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            userPic.setImage(img, forState: .Normal)
+            userImage = img
+        }
+        
         
     }
     
