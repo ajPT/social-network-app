@@ -14,7 +14,6 @@ let SHADOW_COLOR: CGFloat = 157.0/255.0
 
 //Keys
 let KEY_UID = "uid"
-let KEY_IMAGESHACK = "FM9SLZ32ecfa8ec22d067d1ab43452c99b35e43d"
 
 //Segues
 let SEGUE_LOGGED_IN = "loggedIn"
@@ -28,5 +27,6 @@ let STATUS_ERROR_INTERNAL_ERROR = 17999
 let STATUS_ERROR_USER_NOT_FOUND = 17011
 let STATUS_ERROR_WRONG_PASSWORD = 17009
 
-//Url
-let URL_UPLOAD = "https://post.imageshack.us/upload_api.php"
+//ImageShack
+//let KEY_IMAGESHACK = "FM9SLZ32ecfa8ec22d067d1ab43452c99b35e43d"
+//let URL_UPLOAD = "https://post.imageshack.us/upload_api.php"

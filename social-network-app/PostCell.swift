@@ -48,9 +48,6 @@ class PostCell: UITableViewCell {
         
         currentUserLikeRef = DataService.ds.REF_CURRENT_USER_LIKES.child(post.postKey)
         
-        //userImage.image =
-        //userName.text =
-        
         numberOfLikes.text = "\(post.likes)"
         postDescription.text = post.postDescription
         
