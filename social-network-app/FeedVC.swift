@@ -63,6 +63,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         if let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as? PostCell {
             let post = posts[indexPath.row]
             cell.request?.cancel()
+            cell.requestPhoto?.cancel()
             var img: UIImage?
             if let imgUrl = post.postImageUrl {
                 img = FeedVC.cache.objectForKey(imgUrl) as? UIImage

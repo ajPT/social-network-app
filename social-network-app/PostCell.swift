@@ -14,6 +14,7 @@ class PostCell: UITableViewCell {
 
     //MARK: - Properties
     var request: Request?
+    var requestPhoto: Request?
     var currentUserLikeRef: FIRDatabaseReference!
     var post: Post!
     
@@ -85,6 +86,17 @@ class PostCell: UITableViewCell {
             if let userInfo = snapshot.value as? [String: AnyObject] {
                 if let username = userInfo["username"] as? String {
                     self.userName.text = username
+                }
+                if let photo = userInfo["photo"] as? String {
+                    let url = NSURL(string: photo)!
+                    self.requestPhoto = Alamofire.request(.GET, url).response(completionHandler: { (request: NSURLRequest?, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) in
+                        if error == nil {
+                            if let imgData = data {
+                                let img = UIImage(data: imgData)
+                                self.userImage.image = img
+                            }
+                        }
+                    })
                 }
             }
         }
