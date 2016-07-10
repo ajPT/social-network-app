@@ -61,38 +61,59 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                         ]
                         
                         if self.userImage != nil {
-                            let img = UIImageJPEGRepresentation(self.userImage!, 0.2)
-                            let url = NSURL(string: URL_UPLOAD)
-                            let imageShackKey = KEY_IMAGESHACK.dataUsingEncoding(NSUTF8StringEncoding)
-                            let format = "json".dataUsingEncoding(NSUTF8StringEncoding)
-
-                            if let uploadUrl = url, let imgData = img, let keyData = imageShackKey, let formatData = format {
-                                Alamofire.upload(.POST, uploadUrl, multipartFormData: { multipartFormData in
-                                    multipartFormData.appendBodyPart(data: keyData, name: "key")
-                                    multipartFormData.appendBodyPart(data: imgData, name: "fileupload", fileName: "image", mimeType: "image/jpg")
-                                    multipartFormData.appendBodyPart(data: formatData, name: "format")
-                                    },
-                                    encodingCompletion: { encodingResult in
-                                        switch encodingResult {
-                                        case .Success(let upload, _, _):
-                                            upload.responseJSON { response in
-                                                if let resultJSON = response.result.value as? [String:AnyObject] {
-                                                    if let linksDict = resultJSON["links"] as? [String:AnyObject] {
-                                                        if let link = linksDict["image_link"] as? String {
-                                                            userInformation["photo"] = link
-                                                            DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
-                                                            NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        case .Failure(let encodingError):
-                                            print(encodingError)
-                                        }
+                            let img = UIImageJPEGRepresentation(self.userImage!, 0.2)!
+                            let imgPath = "\(NSDate.timeIntervalSinceReferenceDate())"
+                            let metadataInfo = FIRStorageMetadata()
+                            metadataInfo.contentType = "image/jpeg"
+                            DataService.ds.REF_STORAGE.child(imgPath).putData(img, metadata: metadataInfo, completion: { (metadata: FIRStorageMetadata?, error: NSError?) in
+                                if error != nil {
+                                    print(error)
+                                } else if let downloadedData = metadata {
+                                    if let downloadedURL = downloadedData.downloadURL() {
+                                        let url = downloadedURL.absoluteString
+                                            print(url)
+                                        userInformation["photo"] = url
+                                        DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
+                                        NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
                                     }
-                                )
-                                
-                            }
+                                }
+                            })
+                            
+// ---------------
+// IMAGESHACK
+// ---------------
+//                            let img = UIImageJPEGRepresentation(self.userImage!, 0.2)
+//                            let url = NSURL(string: URL_UPLOAD)
+//                            let imageShackKey = KEY_IMAGESHACK.dataUsingEncoding(NSUTF8StringEncoding)
+//                            let format = "json".dataUsingEncoding(NSUTF8StringEncoding)
+//
+//                            if let uploadUrl = url, let imgData = img, let keyData = imageShackKey, let formatData = format {
+//                                Alamofire.upload(.POST, uploadUrl, multipartFormData: { multipartFormData in
+//                                    multipartFormData.appendBodyPart(data: keyData, name: "key")
+//                                    multipartFormData.appendBodyPart(data: imgData, name: "fileupload", fileName: "image", mimeType: "image/jpg")
+//                                    multipartFormData.appendBodyPart(data: formatData, name: "format")
+//                                    },
+//                                    encodingCompletion: { encodingResult in
+//                                        switch encodingResult {
+//                                        case .Success(let upload, _, _):
+//                                            upload.responseJSON { response in
+//                                                if let resultJSON = response.result.value as? [String:AnyObject] {
+//                                                    if let linksDict = resultJSON["links"] as? [String:AnyObject] {
+//                                                        if let link = linksDict["image_link"] as? String {
+//                                                            userInformation["photo"] = link
+//                                                            DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
+//                                                            NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
+//                                        case .Failure(let encodingError):
+//                                            print(encodingError)
+//                                        }
+//                                    }
+//                                )
+//                                
+//                            }
                         } else {
                             DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
                             NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)

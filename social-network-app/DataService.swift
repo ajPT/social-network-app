@@ -13,16 +13,20 @@ class DataService {
     
     static let ds = DataService()
 
-    
     //MARK: - Properties
 
     private var _REF_BASE = FIRDatabase.database().reference()
-    
+    private var _REF_STORAGE = FIRStorage.storage().referenceForURL("gs://social-network-c3fed.appspot.com")
+
     
     //MARK: - Computed Properties
     
     var REF_BASE: FIRDatabaseReference {
         return _REF_BASE
+    }
+    
+    var REF_STORAGE: FIRStorageReference {
+        return _REF_STORAGE
     }
     
     var REF_USERS: FIRDatabaseReference {

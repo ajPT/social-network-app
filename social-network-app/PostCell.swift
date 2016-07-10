@@ -62,8 +62,8 @@ class PostCell: UITableViewCell {
                 if error == nil {
                     if let imgData = data {
                         self.postImage.hidden = false
-                        let img = UIImage(data: imgData)
-                        FeedVC.cache.setObject(img!, forKey: imgUrl)
+                        let img = UIImage(data: imgData)!
+                        FeedVC.cache.setObject(img, forKey: imgUrl)
                         self.postImage.image = img
                     }
                 }
