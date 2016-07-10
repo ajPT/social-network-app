@@ -178,6 +178,16 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
 //        }
     }
     
+    @IBAction func onProfileBtnPressed(sender: UIButton) {
+    
+    }
+    
+    @IBAction func onLogoutBtnPressed(sender: UIButton) {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(KEY_UID)
+        FeedVC.cache.removeAllObjects()
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     //MARK: - Aux
     
