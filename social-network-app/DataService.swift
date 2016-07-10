@@ -59,7 +59,11 @@ class DataService {
     //MARK: - Functions
     
     func createFirebaseUser(uid: String, userInfo: [String: AnyObject]) {
-        REF_USERS.child(uid).setValue(userInfo)
+        REF_USERS.child(uid).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+            if snapshot.value is NSNull {
+                self.REF_USERS.child(uid).setValue(userInfo)
+            }
+        }
     }
 
     func createFirebasePostWithAutoID(postInfo: [String: AnyObject]) {
