@@ -45,6 +45,12 @@ class DataService {
         return userLikes
     }
     
+    var REF_CURRENT_USER_POSTS: FIRDatabaseReference {
+        let user = REF_CURRENT_USER
+        let userPosts = user.child("posts")
+        return userPosts
+    }
+    
     
     //MARK: - Functions
     

@@ -67,6 +67,10 @@ class Post {
             _likes = likes
         }
         
+        if let username = postInfo["username"] as? String {
+            _username = username
+        }
+        
         _postRef = DataService.ds.REF_POSTS.child(_postKey)
     }
     

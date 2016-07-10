@@ -44,13 +44,15 @@ class PostCell: UITableViewCell {
 
     func configureCell (post: Post, img: UIImage?) {
         self.post = post
+        
+        currentUserLikeRef = DataService.ds.REF_CURRENT_USER_LIKES.child(post.postKey)
+        
         //userImage.image =
         //userName.text =
+        
         numberOfLikes.text = "\(post.likes)"
         postDescription.text = post.postDescription
         
-        currentUserLikeRef = DataService.ds.REF_CURRENT_USER_LIKES.child(post.postKey)
-
         if img != nil {
             postImage.hidden = false
             postImage.image = img
@@ -70,14 +72,21 @@ class PostCell: UITableViewCell {
         }
         
         //like button
-        currentUserLikeRef.observeSingleEventOfType(.Value, andPreviousSiblingKeyWithBlock: { (snapshot: FIRDataSnapshot, _) in
+        currentUserLikeRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
             if let _ = snapshot.value as? NSNull {
                 self.setHeartImages("heart-empty")
             } else {
                 self.setHeartImages("heart-full")
             }
-        }) { (error: NSError) in
-            print(error)
+        }
+        
+        //user info
+        DataService.ds.REF_USERS.child(post.username).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+            if let userInfo = snapshot.value as? [String: AnyObject] {
+                if let username = userInfo["username"] as? String {
+                    self.userName.text = username
+                }
+            }
         }
         
     }
@@ -86,7 +95,7 @@ class PostCell: UITableViewCell {
     //MARK: - IBActions
     
     @IBAction func onLikeBtnPressed(sender: UIButton) {
-        currentUserLikeRef.observeSingleEventOfType(.Value, andPreviousSiblingKeyWithBlock: { (snapshot: FIRDataSnapshot, _) in
+        currentUserLikeRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
             if let _ = snapshot.value as? NSNull {
                 self.setHeartImages("heart-full")
                 self.post.increaseNrLikes()
@@ -96,8 +105,6 @@ class PostCell: UITableViewCell {
                 self.post.decreaseNrLikes()
                 self.currentUserLikeRef.removeValue()
             }
-        }) { (error: NSError) in
-            print(error)
         }
     }
     
