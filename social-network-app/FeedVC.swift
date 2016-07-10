@@ -158,7 +158,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         var postDict: [String:AnyObject] = [
             "description" : descriptionField.text!,
             "likes" : 0,
-            "username" : NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
+            "username" : NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String,
+            "timestamp" : NSDate().timeIntervalSince1970 * 1000
         ]
         if let imageURL = imgUrl {
             postDict["image"] = imageURL
