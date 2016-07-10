@@ -31,7 +31,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName : UIFont(name: "NotoSans-Bold", size: 16.0)!,
+            NSFontAttributeName : UIFont(name: "NotoSans-Bold", size: 15.0)!,
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
         
