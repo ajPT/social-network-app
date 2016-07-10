@@ -183,6 +183,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     }
     
     @IBAction func onLogoutBtnPressed(sender: UIButton) {
+      
+        
+        // *WIP* : remove UID? when entering again the posts and likes info are deleted -> creating user
+        
         NSUserDefaults.standardUserDefaults().removeObjectForKey(KEY_UID)
         FeedVC.cache.removeAllObjects()
         dismissViewControllerAnimated(true, completion: nil)
