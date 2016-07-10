@@ -707,7 +707,22 @@
                             <constraint firstItem="prJ-w6-yJG" firstAttribute="top" secondItem="tUg-Fb-dhL" secondAttribute="bottom" constant="8" id="ob9-8q-1tp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Upload Me Up" id="jYH-Qe-acg"/>
+                    <navigationItem key="navigationItem" title="Upload Me Up" id="jYH-Qe-acg">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="Oee-Bo-CKP">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ABd-AW-fF5" userLabel="profileBtn">
+                                <rect key="frame" x="20" y="6" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="user"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="pwn-LL-1Fh">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p3a-BB-gPi" userLabel="offBtn">
+                                <rect key="frame" x="548" y="6" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="off"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cameraImg" destination="Kh6-aX-jQs" id="8va-n3-I96"/>
                         <outlet property="descriptionField" destination="PHb-wW-CL5" id="7u7-a6-qcI"/>
@@ -750,7 +765,9 @@
         <image name="google" width="256" height="256"/>
         <image name="heart-empty" width="150" height="147"/>
         <image name="logo_h" width="242" height="86"/>
+        <image name="off" width="24" height="24"/>
         <image name="profile" width="128" height="128"/>
+        <image name="user" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xiO-0D-nOi"/>
