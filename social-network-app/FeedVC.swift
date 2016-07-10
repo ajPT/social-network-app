@@ -29,6 +29,12 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSFontAttributeName : UIFont(name: "NotoSans-Bold", size: 16.0)!,
+            NSForegroundColorAttributeName: UIColor.whiteColor()
+        ]
+        
         tableView.estimatedRowHeight = 365
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self

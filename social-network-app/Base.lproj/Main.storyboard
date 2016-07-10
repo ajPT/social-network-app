@@ -500,7 +500,7 @@
             </objects>
             <point key="canvasLocation" x="265" y="1167"/>
         </scene>
-        <!--FeedVC-->
+        <!--Upload Me Up-->
         <scene sceneID="BHx-R5-rWT">
             <objects>
                 <viewController id="D45-Nm-vvc" customClass="FeedVC" customModule="social_network_app" customModuleProvider="target" sceneMemberID="viewController">
@@ -707,7 +707,7 @@
                             <constraint firstItem="prJ-w6-yJG" firstAttribute="top" secondItem="tUg-Fb-dhL" secondAttribute="bottom" constant="8" id="ob9-8q-1tp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jYH-Qe-acg"/>
+                    <navigationItem key="navigationItem" title="Upload Me Up" id="jYH-Qe-acg"/>
                     <connections>
                         <outlet property="cameraImg" destination="Kh6-aX-jQs" id="8va-n3-I96"/>
                         <outlet property="descriptionField" destination="PHb-wW-CL5" id="7u7-a6-qcI"/>
