@@ -27,9 +27,9 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
-            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
-        }
+//        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
+//            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+//        }
     }
     
     

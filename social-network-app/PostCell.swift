@@ -97,6 +97,8 @@ class PostCell: UITableViewCell {
                             }
                         }
                     })
+                } else {
+                    self.userImage.image = UIImage(named: "profile")
                 }
             }
         }
