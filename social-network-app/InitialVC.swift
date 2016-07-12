@@ -44,36 +44,8 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             } else {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(accessToken)
-                FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-                    if error != nil {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
-                    } else if let facebookUser = user {
-                        
-                        let uid = facebookUser.uid
-                        
-                        var userInformation = [String: AnyObject]()
-                        
-                        if let email = facebookUser.email {
-                            userInformation["email"] = email
-                        }
-                        if let photoUrl = facebookUser.photoURL {
-                            let urlStr = String(photoUrl)
-                            userInformation["photo"] = urlStr
-                        }
-                        if let username = facebookUser.displayName {
-                            //let name = username.stringByReplacingOccurrencesOfString(" ", withString: "")
-                            //userInformation["username"] = name
-                            userInformation["username"] = username
-                        }
-                        
-                        DataService.ds.createFirebaseUser(uid, userInfo: userInformation)
-                        NSUserDefaults.standardUserDefaults().setValue(uid, forKey: KEY_UID)
-                        
-                        self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
-                    } else {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
-                    }
-                }
+
+                self.authenticateWithFirebaseCredential(credential: credential)
                 
             }
         }
@@ -95,69 +67,28 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             let idToken = user.authentication.idToken
             let accessToken = user.authentication.accessToken
             let credential = FIRGoogleAuthProvider.credentialWithIDToken(idToken, accessToken: accessToken)
-
-            FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-                if error != nil {
-                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
-                } else if let googleUser = user {
-                    var userInformation = [String: AnyObject]()
-                    
-                    if let username = googleUser.displayName {
-                        userInformation["username"] = username
-                    }
-                    if let email = googleUser.email {
-                        userInformation["email"] = email
-                    }
-                    if let img = googleUser.photoURL {
-                        let imgUrl = String(img)
-                        userInformation["photo"] = imgUrl
-                    }
-                    
-                    DataService.ds.createFirebaseUser(googleUser.uid, userInfo: userInformation)
-                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
-                    
-                    self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
-                } else {
-                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
-                }
-            }
-
+            
+            authenticateWithFirebaseCredential(credential: credential)
+            
         } else {
             print("\(error)")
             UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
         }
     }
     
-    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,
-                withError error: NSError!) {
-        // Perform any operations when the user disconnects from app here.
-        // ...
-    }
+//    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,
+//                withError error: NSError!) {
+//        // Perform any operations when the user disconnects from app here.
+//        // ...
+//    }
     
     //MARK: Email/Password Login
     @IBAction func onLoginBtnPressed(sender: UIButton) {
     
         if let email = emailField.text where email != "", let password = passwordField.text where password != "" {
-        
-            FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user: FIRUser?, error: NSError?) in
-                if let err = error {
-                    if err.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.NetworkMessages.ERROR_NETWORK_REQUEST_FAILED)
-                    } else if err.code == STATUS_ERROR_INTERNAL_ERROR {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_INTERNAL_ERROR, msg: UtilAlerts.LoginMessages.ERROR_INTERNAL_ERROR)
-                    } else if err.code == STATUS_ERROR_USER_NOT_FOUND {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_USER_NOT_FOUND, msg: UtilAlerts.LoginMessages.ERROR_USER_NOT_FOUND)
-                    } else if err.code == STATUS_ERROR_WRONG_PASSWORD {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WRONG_PASSWORD, msg: UtilAlerts.LoginMessages.ERROR_WRONG_PASSWORD)
-                    } else {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_LOGIN)
-                    }
-                } else if user != nil {
-                    self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
-                } else {
-                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
-                }
-            })
+            
+            authenticateWithFirebaseEmailPassword(email: email, password: password)
+            
         } else {
             UtilAlerts().showAlert(self, title: UtilAlerts.Titles.MISSING_EMAIL_PASSWORD, msg: UtilAlerts.LoginMessages.MISSING_EMAIL_PASSWORD)
         }
@@ -168,7 +99,77 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     @IBAction func onSignUpBtnPressed(sender: UIButton) {
         performSegueWithIdentifier(SEGUE_CREATE_ACCOUNT, sender: nil)
     }
+    
+    
+    //MARK: - Firebase auth
+    
+    //MARK: Facebook/Google
+    func authenticateWithFirebaseCredential(credential credential: FIRAuthCredential) {
+        
+        FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+            if error != nil {
+                UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
+            } else if let appUser = user {
+        
+                let uid = appUser.uid
 
+                var userInformation = [String: AnyObject]()
+                
+                if let email = appUser.email {
+                    userInformation["email"] = email
+                }
+                if let photoUrl = appUser.photoURL {
+                    let urlStr = String(photoUrl)
+                    userInformation["photo"] = urlStr
+                }
+                if let username = appUser.displayName {
+                    //let name = username.stringByReplacingOccurrencesOfString(" ", withString: "")
+                    //userInformation["username"] = name
+                    userInformation["username"] = username
+                }
+                
+                DataService.ds.createFirebaseUser(uid, userInfo: userInformation)
+                NSUserDefaults.standardUserDefaults().setValue(uid, forKey: KEY_UID)
+                
+                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                
+            } else {
+                UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
+            }
+        }
 
+    }
+    
+    //MARK: Email/Password
+    func authenticateWithFirebaseEmailPassword(email email: String, password: String) {
+        
+        FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user: FIRUser?, error: NSError?) in
+            if let err = error {
+                
+                if err.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
+                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.NetworkMessages.ERROR_NETWORK_REQUEST_FAILED)
+                } else if err.code == STATUS_ERROR_INTERNAL_ERROR {
+                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_INTERNAL_ERROR, msg: UtilAlerts.LoginMessages.ERROR_INTERNAL_ERROR)
+                } else if err.code == STATUS_ERROR_USER_NOT_FOUND {
+                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_USER_NOT_FOUND, msg: UtilAlerts.LoginMessages.ERROR_USER_NOT_FOUND)
+                } else if err.code == STATUS_ERROR_WRONG_PASSWORD {
+                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WRONG_PASSWORD, msg: UtilAlerts.LoginMessages.ERROR_WRONG_PASSWORD)
+                } else {
+                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_LOGIN)
+                }
+                
+            } else if user != nil {
+                
+                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                
+            } else {
+                
+                UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
+                
+            }
+        })
+    }
+    
+    
 }
 
