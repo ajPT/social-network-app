@@ -27,6 +27,7 @@
 		E0AC76C91D24379100396FD4 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC76C81D24379100396FD4 /* DataService.swift */; };
 		E0AC76CB1D28234000396FD4 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC76CA1D28234000396FD4 /* SignUpVC.swift */; };
 		E0AC76CD1D28257F00396FD4 /* UtilAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC76CC1D28257F00396FD4 /* UtilAlerts.swift */; };
+		E0B4A6791D3592B1003EE8EE /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B4A6781D3592B0003EE8EE /* ProfileVC.swift */; };
 		E0E954C31D20A393007C8F78 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */; };
 		E0E954C41D20A393007C8F78 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */; };
 		E0E954C51D20A393007C8F78 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E954C21D20A392007C8F78 /* Bolts.framework */; };
@@ -58,6 +59,7 @@
 		E0AC76C81D24379100396FD4 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		E0AC76CA1D28234000396FD4 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		E0AC76CC1D28257F00396FD4 /* UtilAlerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilAlerts.swift; sourceTree = "<group>"; };
+		E0B4A6781D3592B0003EE8EE /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		E0E954C01D20A392007C8F78 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E0E954C11D20A392007C8F78 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		E0E954C21D20A392007C8F78 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				E0658CAE1D1FE5E2008F488D /* InitialVC.swift */,
 				E0AC76CA1D28234000396FD4 /* SignUpVC.swift */,
 				E00238B71D294E8E00AB0D82 /* FeedVC.swift */,
+				E0B4A6781D3592B0003EE8EE /* ProfileVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				E0AC76C91D24379100396FD4 /* DataService.swift in Sources */,
 				E0658CAF1D1FE5E2008F488D /* InitialVC.swift in Sources */,
 				E00CAC341D202BDA0096B7A6 /* RoundedBorderedTextField.swift in Sources */,
+				E0B4A6791D3592B1003EE8EE /* ProfileVC.swift in Sources */,
 				E0658CAD1D1FE5E2008F488D /* AppDelegate.swift in Sources */,
 				E00238BA1D29524900AB0D82 /* PostCell.swift in Sources */,
 				E00CAC301D20181F0096B7A6 /* Constants.swift in Sources */,

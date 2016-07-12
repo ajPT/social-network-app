@@ -733,6 +733,7 @@
                         <outlet property="cameraImg" destination="Kh6-aX-jQs" id="8va-n3-I96"/>
                         <outlet property="descriptionField" destination="PHb-wW-CL5" id="7u7-a6-qcI"/>
                         <outlet property="tableView" destination="prJ-w6-yJG" id="aPM-UZ-tVC"/>
+                        <segue destination="3rN-3W-EJp" kind="show" identifier="showProfileVC" id="R7C-fg-vQb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1M-Zc-sJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -743,6 +744,24 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1792" y="293"/>
+        </scene>
+        <!--ProfileVC-->
+        <scene sceneID="JT5-iC-j0J">
+            <objects>
+                <viewController id="3rN-3W-EJp" customClass="ProfileVC" customModule="social_network_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6u7-rD-4X1"/>
+                        <viewControllerLayoutGuide type="bottom" id="B3N-0T-7zd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zRa-yz-V4N">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bPg-St-FFr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2458" y="293"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sAd-Dd-LbW">

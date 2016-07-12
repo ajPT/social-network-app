@@ -174,12 +174,12 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
 //                self.postToFirebase(nil)
 //            }
 //        } else {
-//            //TODO: Add Alert "You must insert ..."
+//            //Add Alert "You must insert ..."
 //        }
     }
     
     @IBAction func onProfileBtnPressed(sender: UIButton) {
-    
+        performSegueWithIdentifier("showProfileVC", sender: nil)
     }
     
     @IBAction func onLogoutBtnPressed(sender: UIButton) {
