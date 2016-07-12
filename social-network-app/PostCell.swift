@@ -20,7 +20,7 @@ class PostCell: UITableViewCell {
     
     //MARK: - IBOutlets
     
-    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userImage: RoundedImage!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var numberOfLikes: UILabel!
     @IBOutlet weak var postDescription: UITextView!
@@ -35,8 +35,6 @@ class PostCell: UITableViewCell {
     }
     
     override func drawRect(rect: CGRect) {
-        userImage.layer.cornerRadius = userImage.frame.size.width / 2
-        userImage.clipsToBounds = true
         postImage.clipsToBounds = true
     }
     
