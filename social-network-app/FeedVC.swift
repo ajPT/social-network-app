@@ -39,7 +39,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
-        DataService.ds.REF_POSTS.observeEventType(.Value, withBlock: { (snapshot) in
+        DataService.ds.REF_POSTS.queryOrderedByChild("timestamp").observeEventType(.Value, withBlock: { (snapshot) in
             
             self.posts = []
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
@@ -204,7 +204,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             "description" : descriptionField.text!,
             "likes" : 0,
             "username" : NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String,
-            "timestamp" : NSDate.timeIntervalSinceReferenceDate()
+            "timestamp" : -1 * NSDate.timeIntervalSinceReferenceDate()
         ]
         if let imageURL = imgUrl {
             postDict["image"] = imageURL
