@@ -18,6 +18,7 @@ let KEY_UID = "uid"
 //Segues
 let SEGUE_LOGGED_IN = "loggedIn"
 let SEGUE_CREATE_ACCOUNT = "createAccountScreen"
+let SEGUE_USER_PROFILE = "showProfileVC"
 
 //Status Codes
 let STATUS_ERROR_WEAK_PASSWORD = 17026

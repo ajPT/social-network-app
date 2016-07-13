@@ -74,7 +74,7 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                                             print(url)
                                         userInformation["photo"] = url
                                         DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
-                                        NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
+                                        //NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
                                     }
                                 }
                             })
@@ -116,10 +116,11 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
 //                            }
                         } else {
                             DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
-                            NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
+                            //NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
                         }
                         
-                        self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                        self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: firebaseUser)
+                        
                     } else {
                         UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
                     }
@@ -161,8 +162,19 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             userPic.setImage(img, forState: .Normal)
             userImage = img
         }
-        
-        
+    }
+    
+    
+    //MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SEGUE_LOGGED_IN {
+            if let feedVC = segue.destinationViewController as? FeedVC {
+                if let user = sender as? FIRUser {
+                    feedVC.currentUser = user
+                }
+            }
+        }
     }
     
     

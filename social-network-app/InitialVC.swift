@@ -27,9 +27,15 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
-            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+        
+        FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
+            if let user = user {
+                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: user)
+            }
         }
+//        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
+//            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+//        }
     }
     
     
@@ -129,9 +135,9 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 }
                 
                 DataService.ds.createFirebaseUser(uid, userInfo: userInformation)
-                NSUserDefaults.standardUserDefaults().setValue(uid, forKey: KEY_UID)
+                //NSUserDefaults.standardUserDefaults().setValue(uid, forKey: KEY_UID)
                 
-                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: appUser)
                 
             } else {
                 UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.GeneralMessages.UNKNOWN)
@@ -158,9 +164,9 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                     UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_LOGIN)
                 }
                 
-            } else if user != nil {
+            } else if let appUser = user {
                 
-                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: appUser)
                 
             } else {
                 
@@ -168,6 +174,21 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 
             }
         })
+    }
+    
+    
+    //MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SEGUE_LOGGED_IN {
+            if let nav = segue.destinationViewController as? UINavigationController {
+                if let feedVC = nav.viewControllers[0] as? FeedVC {
+                    if let user = sender as? FIRUser {
+                        feedVC.currentUser = user
+                    }
+                }
+            }
+        }
     }
     
     

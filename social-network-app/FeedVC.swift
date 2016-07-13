@@ -17,6 +17,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     var posts = [Post]()
     var imagePicker: UIImagePickerController!
     var imageSelected = false
+    var currentUser: FIRUser!
     
     //MARK: - IBOutlets
     
@@ -29,7 +30,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName : UIFont(name: "NotoSans-Bold", size: 15.0)!,
             NSForegroundColorAttributeName: UIColor.whiteColor()
@@ -106,7 +107,6 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     @IBAction func onPostBtnPressed(sender: RoundedShadowedBtn) {
         if let desc = descriptionField.text where desc != "" {
-            
             if let selectedImg = cameraImg.image where imageSelected == true {
                 let imgData = UIImageJPEGRepresentation(selectedImg, 0.2)!
                 let metadataInfo = FIRStorageMetadata()
@@ -179,11 +179,16 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     }
     
     @IBAction func onProfileBtnPressed(sender: UIButton) {
-        performSegueWithIdentifier("showProfileVC", sender: nil)
+        performSegueWithIdentifier("showProfileVC", sender: currentUser)
     }
     
     @IBAction func onLogoutBtnPressed(sender: UIButton) {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(KEY_UID)
+        //NSUserDefaults.standardUserDefaults().removeObjectForKey(KEY_UID)
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch let err as NSError {
+            print(err)
+        }
         FeedVC.cache.removeAllObjects()
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -203,14 +208,15 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         var postDict: [String:AnyObject] = [
             "description" : descriptionField.text!,
             "likes" : 0,
-            "username" : NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String,
+            "username" : currentUser.uid,
+                //NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String,
             "timestamp" : -1 * NSDate.timeIntervalSinceReferenceDate()
         ]
         if let imageURL = imgUrl {
             postDict["image"] = imageURL
         }
         
-        DataService.ds.createFirebasePostWithAutoID(postDict)
+        DataService.ds.createFirebasePostWithAutoID(currentUser.uid, postInfo: postDict)
         
         resetPostFields()
         tableView.reloadData()
@@ -220,6 +226,16 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         descriptionField.text = ""
         cameraImg.image = UIImage(named: "camera")
         imageSelected = false
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SEGUE_USER_PROFILE {
+            if let profileVC = segue.destinationViewController as? ProfileVC {
+                if let user = sender as? FIRUser {
+                    profileVC.currentUser = user
+                }
+            }
+        }
     }
 
 

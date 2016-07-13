@@ -11,9 +11,6 @@ import UIKit
 
 class UtilAlerts {
     
-    //TODO: - Move alert messages to here
-    
-    
     //MARK: - Alerts messages
     
     //MARK: Titles

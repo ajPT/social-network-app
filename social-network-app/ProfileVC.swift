@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     //MARK: - Properties
     
     var imagePicker: UIImagePickerController!
-    
+    var currentUser: FIRUser!
     
     //MARK: - IBOutlets
     

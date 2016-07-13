@@ -17,6 +17,7 @@ class PostCell: UITableViewCell {
     var requestPhoto: Request?
     var currentUserLikeRef: FIRDatabaseReference!
     var post: Post!
+    var user = FIRAuth.auth()?.currentUser
     
     //MARK: - IBOutlets
     
@@ -44,7 +45,7 @@ class PostCell: UITableViewCell {
     func configureCell (post: Post, img: UIImage?) {
         self.post = post
         
-        currentUserLikeRef = DataService.ds.REF_CURRENT_USER_LIKES.child(post.postKey)
+        currentUserLikeRef = DataService.ds.REF_BASE.child("users/\(user!.uid)/likes/\(post.postKey)")
         
         numberOfLikes.text = "\(post.likes)"
         postDescription.text = post.postDescription

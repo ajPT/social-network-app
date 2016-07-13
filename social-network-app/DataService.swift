@@ -36,25 +36,7 @@ class DataService {
     var REF_POSTS: FIRDatabaseReference {
         return _REF_BASE.child("posts")
     }
-    
-    var REF_CURRENT_USER: FIRDatabaseReference {
-        let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
-        let user = _REF_BASE.child("users/\(uid)")
-        return user
-    }
-    
-    var REF_CURRENT_USER_LIKES: FIRDatabaseReference {
-        let user = REF_CURRENT_USER
-        let userLikes = user.child("likes")
-        return userLikes
-    }
-    
-    var REF_CURRENT_USER_POSTS: FIRDatabaseReference {
-        let user = REF_CURRENT_USER
-        let userPosts = user.child("posts")
-        return userPosts
-    }
-    
+
     
     //MARK: - Functions
     
@@ -66,13 +48,13 @@ class DataService {
         }
     }
 
-    func createFirebasePostWithAutoID(postInfo: [String: AnyObject]) {
+    func createFirebasePostWithAutoID(userId: String, postInfo: [String: AnyObject]) {
         //create post
         let autoIDPost = REF_POSTS.childByAutoId()
         autoIDPost.setValue(postInfo)
         //save to current user
         let postKey = autoIDPost.key
-        REF_CURRENT_USER.child("posts").updateChildValues([postKey: true])
+        REF_BASE.child("users/\(userId)/posts").updateChildValues([postKey: true])
     }
     
 }
