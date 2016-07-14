@@ -901,8 +901,11 @@
                     </view>
                     <connections>
                         <outlet property="emailField" destination="6P6-LH-wUM" id="p7s-9a-scy"/>
+                        <outlet property="emailLbl" destination="hnw-1u-9gN" id="Dyx-68-jZ3"/>
                         <outlet property="newPassField" destination="RUV-Gt-bQs" id="gI6-Za-0Av"/>
+                        <outlet property="newPassLbl" destination="6Wf-yg-10w" id="YwA-Wq-CMa"/>
                         <outlet property="oldPassField" destination="6pD-EG-sOK" id="qT9-Px-3YC"/>
+                        <outlet property="oldPassLbl" destination="TcU-VA-lSw" id="DJq-bV-H9L"/>
                         <outlet property="userImg" destination="IGY-R3-NF0" id="lAt-PA-KdY"/>
                         <outlet property="usernameField" destination="n7k-2G-7Xk" id="f47-Rp-7uN"/>
                     </connections>

@@ -25,6 +25,9 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
     @IBOutlet weak var emailField: RoundedBorderedTextField!
     @IBOutlet weak var oldPassField: RoundedBorderedTextField!
     @IBOutlet weak var newPassField: RoundedBorderedTextField!
+    @IBOutlet weak var oldPassLbl: UILabel!
+    @IBOutlet weak var newPassLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
     
     
     //MARK: - View Life Cycle
@@ -86,6 +89,13 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
                         }
                     })
                 }
+                if let provider = userInfo["provider"] as? String {
+                    if provider != "firebase" {
+                        self.hideEmailPassFields(true)
+                    } else {
+                        self.hideEmailPassFields(false)
+                    }
+                }
             }
         })
     }
@@ -94,6 +104,15 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
         if parent == nil {
             request?.cancel()
         }
+    }
+    
+    func hideEmailPassFields(boolean: Bool) {
+        oldPassField.hidden = boolean
+        newPassField.hidden = boolean
+        oldPassLbl.hidden = boolean
+        newPassLbl.hidden = boolean
+        emailField.hidden = boolean
+        emailLbl.hidden = boolean
     }
 
 
