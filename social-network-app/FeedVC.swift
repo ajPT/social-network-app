@@ -133,52 +133,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
         } else {
             //TODO: Add Alert "You must insert a description..."
-        }
-        
-// ---------------
-// IMAGESHACK
-// ---------------
-//        if let desc = descriptionField.text where desc != "" {
-//            if let img = cameraImg.image where imageSelected == true {
-//                let url = NSURL(string: URL_UPLOAD)
-//                let imageShackKey = KEY_IMAGESHACK.dataUsingEncoding(NSUTF8StringEncoding)
-//                let jpegImg = UIImageJPEGRepresentation(img, 0.2)
-//                let format = "json".dataUsingEncoding(NSUTF8StringEncoding)
-//                
-//                if let myUrl = url {
-//
-//                    Alamofire.upload(.POST, myUrl, multipartFormData: { multipartFormData in
-//                        if let keyData = imageShackKey, let imgData = jpegImg, let formatData = format {
-//                            multipartFormData.appendBodyPart(data: keyData, name: "key")
-//                            multipartFormData.appendBodyPart(data: imgData, name: "fileupload", fileName: "image", mimeType: "image/jpeg")
-//                            multipartFormData.appendBodyPart(data: formatData, name: "format")
-//                        }
-//                        },
-//                        encodingCompletion: { encodingResult in
-//                            switch encodingResult {
-//                            case .Success(let upload, _, _):
-//                                upload.responseJSON { response in
-//                                    if let resultJSON = response.result.value as? [String:AnyObject] {
-//                                        if let linksDict = resultJSON["links"] as? [String:AnyObject] {
-//                                            if let link = linksDict["image_link"] as? String {
-//                                                self.postToFirebase(link)
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            case .Failure(let encodingError):
-//                                print(encodingError)
-//                            }
-//                        }
-//                    )
-//                    
-//                }
-//            } else {
-//                self.postToFirebase(nil)
-//            }
-//        } else {
-//            //Add Alert "You must insert ..."
-//        }
+        }        
     }
     
     @IBAction func onProfileBtnPressed(sender: UIButton) {

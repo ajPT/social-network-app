@@ -52,7 +52,6 @@ class UtilAlerts {
     }
     
     
-    
     //MARK: - Show Alert
     func showAlert(vc: UIViewController, title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .Alert)
@@ -61,4 +60,5 @@ class UtilAlerts {
         vc.presentViewController(alert, animated: true, completion: nil)
     }
 
+    
 }
