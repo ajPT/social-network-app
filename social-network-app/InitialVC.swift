@@ -103,6 +103,19 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         performSegueWithIdentifier(SEGUE_CREATE_ACCOUNT, sender: nil)
     }
     
+    //MARK: Forgot password
+    @IBAction func onForgotPasswordPressed(sender: UIButton) {
+        let email = "user@example.com"
+        
+        FIRAuth.auth()?.sendPasswordResetWithEmail(email) { error in
+            if let error = error {
+                print(error)
+            } else {
+                // TODO: - Password reset email sent.
+            }
+        }
+    }
+    
     
     //MARK: - Firebase auth
     
