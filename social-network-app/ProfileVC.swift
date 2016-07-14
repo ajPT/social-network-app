@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
@@ -15,6 +16,7 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
     
     var imagePicker: UIImagePickerController!
     var currentUser: FIRUser!
+    var request: Request?
     
     //MARK: - IBOutlets
     
@@ -64,7 +66,34 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
     }
     
     func updateInitialContent() {
+        let userID = currentUser.uid
+        DataService.ds.REF_USERS.child(userID).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            if let userInfo = snapshot.value as? [String: AnyObject] {
+                if let username = userInfo["username"] as? String {
+                    self.usernameField.placeholder = username
+                }
+                if let email = userInfo["email"] as? String {
+                    self.emailField.placeholder = email
+                }
+                if let photo = userInfo["photo"] as? String {
+                    let url = NSURL(string: photo)!
+                    self.request = Alamofire.request(.GET, url).response(completionHandler: { (request: NSURLRequest?, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) in
+                        if error == nil {
+                            if let imgData = data {
+                                let image = UIImage(data: imgData)
+                                self.userImg.image = image
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
     
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        if parent == nil {
+            request?.cancel()
+        }
     }
 
 
