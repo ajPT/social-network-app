@@ -41,16 +41,19 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             
             FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
                 if let err = error {
-                    if err.code == STATUS_ERROR_EMAIL_ALREADY_IN_USE {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_EMAIL_ALREADY_IN_USE, msg: UtilAlerts.GeneralMessages.ERROR_EMAIL_ALREADY_IN_USE)
-                    } else if err.code == STATUS_ERROR_WEAK_PASSWORD {
-                        self.passwordField.text = ""
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WEAK_PASSWORD, msg: UtilAlerts.GeneralMessages.ERROR_WEAK_PASSWORD)
-                    } else if err.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.NetworkMessages.ERROR_NETWORK_REQUEST_FAILED)
-                    } else {
-                        print(err)
-                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.CreateAccountMessages.UNKNOWN_ERROR_CREATE)
+                    if let FIRerr = FIRAuthErrorCode(rawValue: err.code) {
+                        switch FIRerr {
+                        case .ErrorCodeEmailAlreadyInUse:
+                            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_EMAIL_ALREADY_IN_USE, msg: UtilAlerts.GeneralMessages.ERROR_EMAIL_ALREADY_IN_USE)
+                        case .ErrorCodeWeakPassword:
+                            self.passwordField.text = ""
+                            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WEAK_PASSWORD, msg: UtilAlerts.GeneralMessages.ERROR_WEAK_PASSWORD)
+                        case .ErrorCodeNetworkError:
+                            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.NetworkMessages.ERROR_NETWORK_REQUEST_FAILED)
+                        default:
+                            print(err)
+                            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.CreateAccountMessages.UNKNOWN_ERROR_CREATE)
+                        }
                     }
                 } else if let firebaseUser = user {
                     if firebaseUser.uid != "" {
@@ -74,7 +77,6 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                                             print(url)
                                         userInformation["photo"] = url
                                         DataService.ds.createFirebaseUser(firebaseUser.uid, userInfo: userInformation)
-                                        //NSUserDefaults.standardUserDefaults().setValue(firebaseUser.uid, forKey: KEY_UID)
                                     }
                                 }
                             })

@@ -33,9 +33,6 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: user)
             }
         }
-//        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
-//            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
-//        }
     }
     
     
@@ -135,7 +132,6 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 }
                 
                 DataService.ds.createFirebaseUser(uid, userInfo: userInformation)
-                //NSUserDefaults.standardUserDefaults().setValue(uid, forKey: KEY_UID)
                 
                 self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: appUser)
                 

@@ -183,7 +183,6 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     }
     
     @IBAction func onLogoutBtnPressed(sender: UIButton) {
-        //NSUserDefaults.standardUserDefaults().removeObjectForKey(KEY_UID)
         do {
             try FIRAuth.auth()?.signOut()
         } catch let err as NSError {
@@ -209,7 +208,6 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             "description" : descriptionField.text!,
             "likes" : 0,
             "username" : currentUser.uid,
-                //NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String,
             "timestamp" : -1 * NSDate.timeIntervalSinceReferenceDate()
         ]
         if let imageURL = imgUrl {
