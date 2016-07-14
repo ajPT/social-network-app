@@ -48,7 +48,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(accessToken)
 
-                self.authenticateWithFirebaseCredential(credential: credential)
+                self.authenticateWithFirebaseCredential(credential: credential, facebook: true)
                 
             }
         }
@@ -71,7 +71,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             let accessToken = user.authentication.accessToken
             let credential = FIRGoogleAuthProvider.credentialWithIDToken(idToken, accessToken: accessToken)
             
-            authenticateWithFirebaseCredential(credential: credential)
+            authenticateWithFirebaseCredential(credential: credential, google: true)
             
         } else {
             print("\(error)")
@@ -120,7 +120,7 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     //MARK: - Firebase auth
     
     //MARK: Facebook/Google
-    func authenticateWithFirebaseCredential(credential credential: FIRAuthCredential) {
+    func authenticateWithFirebaseCredential(credential credential: FIRAuthCredential, google: Bool = false, facebook: Bool = false) {
         
         FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
             if error != nil {
@@ -142,6 +142,11 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                     //let name = username.stringByReplacingOccurrencesOfString(" ", withString: "")
                     //userInformation["username"] = name
                     userInformation["username"] = username
+                }
+                if google {
+                    userInformation["provider"] = "google"
+                } else {
+                    userInformation["provider"] = "facebook"
                 }
                 
                 DataService.ds.createFirebaseUser(uid, userInfo: userInformation)

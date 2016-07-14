@@ -60,7 +60,8 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                         
                         var userInformation: [String: AnyObject] = [
                             "username": username,
-                            "email": email
+                            "email": email,
+                            "provider": "firebase"
                         ]
                         
                         if self.userImage != nil {
