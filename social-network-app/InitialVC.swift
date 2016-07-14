@@ -148,16 +148,19 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user: FIRUser?, error: NSError?) in
             if let err = error {
                 
-                if err.code == STATUS_ERROR_NETWORK_REQUEST_FAILED {
-                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.NetworkMessages.ERROR_NETWORK_REQUEST_FAILED)
-                } else if err.code == STATUS_ERROR_INTERNAL_ERROR {
-                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_INTERNAL_ERROR, msg: UtilAlerts.LoginMessages.ERROR_INTERNAL_ERROR)
-                } else if err.code == STATUS_ERROR_USER_NOT_FOUND {
-                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_USER_NOT_FOUND, msg: UtilAlerts.LoginMessages.ERROR_USER_NOT_FOUND)
-                } else if err.code == STATUS_ERROR_WRONG_PASSWORD {
-                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WRONG_PASSWORD, msg: UtilAlerts.LoginMessages.ERROR_WRONG_PASSWORD)
-                } else {
-                    UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_LOGIN)
+                if let FIRErr = FIRAuthErrorCode(rawValue: err.code) {
+                    switch FIRErr {
+                    case .ErrorCodeNetworkError:
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_NETWORK_REQUEST_FAILED, msg: UtilAlerts.NetworkMessages.ERROR_NETWORK_REQUEST_FAILED)
+                    case .ErrorCodeInternalError:
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_INTERNAL_ERROR, msg: UtilAlerts.LoginMessages.ERROR_INTERNAL_ERROR)
+                    case .ErrorCodeUserNotFound:
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_USER_NOT_FOUND, msg: UtilAlerts.LoginMessages.ERROR_USER_NOT_FOUND)
+                    case .ErrorCodeWrongPassword:
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WRONG_PASSWORD, msg: UtilAlerts.LoginMessages.ERROR_WRONG_PASSWORD)
+                    default:
+                        UtilAlerts().showAlert(self, title: UtilAlerts.Titles.UNKNOWN, msg: UtilAlerts.LoginMessages.UNKNOWN_ERROR_LOGIN)
+                    }
                 }
                 
             } else if let appUser = user {
