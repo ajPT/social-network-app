@@ -24,6 +24,7 @@ class UtilAlerts {
         static let ERROR_USER_NOT_FOUND = "Wrong user"
         static let ERROR_INTERNAL_ERROR = "Email is not valid"
         static let MISSING_FIELDS = "All fields are required"
+        static let POST_RELATED = "There is a problem with your post"
     }
     
     //MARK: Login
@@ -49,6 +50,10 @@ class UtilAlerts {
     
     struct NetworkMessages {
         static let ERROR_NETWORK_REQUEST_FAILED = "Please check your network connection."
+    }
+    
+    struct PostMessages {
+        static let MISSING_DESCRIPTION = "You must insert a description."
     }
     
     

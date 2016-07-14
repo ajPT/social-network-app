@@ -132,7 +132,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             }
         
         } else {
-            //TODO: Add Alert "You must insert a description..."
+            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.POST_RELATED, msg: UtilAlerts.PostMessages.MISSING_DESCRIPTION)
         }        
     }
     
