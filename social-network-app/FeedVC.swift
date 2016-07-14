@@ -18,7 +18,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     var imagePicker: UIImagePickerController!
     var imageSelected = false
     var currentUser: FIRUser!
-    var spin: SpinIndicator!
+    var spin = SpinIndicator()
     
     //MARK: - IBOutlets
     
@@ -37,11 +37,9 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
         
-        tableView.estimatedRowHeight = 365
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
-        spin = SpinIndicator()
         spin.startSpinning(self.view)
         
         DataService.ds.REF_POSTS.queryOrderedByChild("timestamp").observeEventType(.Value, withBlock: { (snapshot) in
@@ -92,7 +90,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         if post.postImageUrl == nil {
             return 170
         }
-        return tableView.estimatedRowHeight
+        return 365
     }
     
     
