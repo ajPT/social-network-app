@@ -12,7 +12,7 @@ import FBSDKCoreKit
 import Firebase
 
 class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
-
+    
     //MARK: - IBOutlets
     
     @IBOutlet weak var emailField: UITextField!

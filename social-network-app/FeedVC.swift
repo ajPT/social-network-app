@@ -18,6 +18,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     var imagePicker: UIImagePickerController!
     var imageSelected = false
     var currentUser: FIRUser!
+    var spin: SpinIndicator!
     
     //MARK: - IBOutlets
     
@@ -40,6 +41,9 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
+        spin = SpinIndicator()
+        spin.startSpinning(self.view)
+        
         DataService.ds.REF_POSTS.queryOrderedByChild("timestamp").observeEventType(.Value, withBlock: { (snapshot) in
             
             self.posts = []
@@ -51,7 +55,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                     }
                 }
             }
-           self.tableView.reloadData()
+            self.tableView.reloadData()
+            self.spin.stopSpinning()
         })
     }
 
@@ -226,6 +231,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         imageSelected = false
     }
     
+    //MARK: - Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SEGUE_USER_PROFILE {
             if let profileVC = segue.destinationViewController as? ProfileVC {
