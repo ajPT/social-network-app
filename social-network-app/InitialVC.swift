@@ -105,15 +105,33 @@ class InitialVC: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
     //MARK: Forgot password
     @IBAction func onForgotPasswordPressed(sender: UIButton) {
-        let email = "user@example.com"
         
-        FIRAuth.auth()?.sendPasswordResetWithEmail(email) { error in
-            if let error = error {
-                print(error)
-            } else {
-                // TODO: - Password reset email sent.
+        let ac = UIAlertController(title: "Reset Password", message: "Please insert your email below", preferredStyle: .Alert)
+        ac.addTextFieldWithConfigurationHandler(nil)
+//        ac.addTextFieldWithConfigurationHandler({ (textField: UITextField!) in
+//            textField.placeholder = "Insert your email"
+//        })
+
+        let okAction = UIAlertAction(title: "Submit", style: .Default, handler: { (alertAction: UIAlertAction) in
+            if let textFields = ac.textFields {
+                let theTextFields = textFields as [UITextField]
+                if let email = theTextFields[0].text {
+                    FIRAuth.auth()?.sendPasswordResetWithEmail(email) { error in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            // Password reset email sent.
+                        }
+                    }
+                }
             }
-        }
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+
+        ac.addAction(okAction)
+        ac.addAction(cancelAction)
+        
+        self.presentViewController(ac, animated: true, completion: nil)
     }
     
     
