@@ -16,7 +16,8 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
     
     var imagePicker: UIImagePickerController!
     var currentUser: FIRUser!
-    var request: Request?
+    var requestGetPhoto: Request?
+    var changedphoto = false
     
     //MARK: - IBOutlets
     
@@ -55,6 +56,41 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
     }
     
     @IBAction func onSaveBtnPressed(sender: UIButton) {
+        if changedphoto {
+            if let img = userImg.image {
+                let imgData = UIImageJPEGRepresentation(img, 0.2)!
+                let imgPath = "\(NSDate.timeIntervalSinceReferenceDate())"
+                let metadata = FIRStorageMetadata()
+                metadata.contentType = "image/jpeg"
+                DataService.ds.REF_STORAGE.child(imgPath).putData(imgData, metadata: metadata, completion: { (mData: FIRStorageMetadata?, error: NSError?) in
+                    if error != nil {
+                        print(error)
+                    } else {
+                        if let downloadedData = mData {
+                            if let downloadURL = downloadedData.downloadURL() {
+                                let url = downloadURL.absoluteString
+                                let uid = self.currentUser.uid
+                                let path = "\(uid)/photo"
+                                DataService.ds.REF_USERS.child(path).setValue(url)
+                            }
+                        }
+                    }
+                })
+            }
+        }
+        
+        if let username = usernameField.text where username != "" {
+        
+        }
+        
+        if let email = emailField.text where email != "" {
+        
+        }
+        
+        if let oldPass = oldPassField.text where oldPass != "" {
+        
+        }
+        
         
     }
 
@@ -65,6 +101,7 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
         dismissViewControllerAnimated(true, completion: nil)
         if let img = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             userImg.image = img
+            changedphoto = true
         }
     }
     
@@ -80,7 +117,7 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
                 }
                 if let photo = userInfo["photo"] as? String {
                     let url = NSURL(string: photo)!
-                    self.request = Alamofire.request(.GET, url).response(completionHandler: { (request: NSURLRequest?, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) in
+                    self.requestGetPhoto = Alamofire.request(.GET, url).response(completionHandler: { (request: NSURLRequest?, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) in
                         if error == nil {
                             if let imgData = data {
                                 let image = UIImage(data: imgData)
@@ -102,7 +139,8 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
     
     override func didMoveToParentViewController(parent: UIViewController?) {
         if parent == nil {
-            request?.cancel()
+            requestGetPhoto?.cancel()
+            changedphoto = false
         }
     }
     
