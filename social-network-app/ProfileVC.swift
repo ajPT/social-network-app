@@ -19,6 +19,7 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
     var requestGetPhoto: Request?
     var changedphoto = false
     
+    
     //MARK: - IBOutlets
     
     @IBOutlet weak var userImg: RoundedImage!

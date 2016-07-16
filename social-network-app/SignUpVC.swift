@@ -13,15 +13,18 @@ import Alamofire
 class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: - Properties
+    
     var imagePicker: UIImagePickerController!
     var userImage: UIImage?
 
+    
     //MARK: - IBOutlets
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var userPic: UIButton!
+    
     
     //MARK: - View Life Cycle
     

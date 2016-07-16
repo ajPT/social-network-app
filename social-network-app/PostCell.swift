@@ -13,11 +13,13 @@ import Firebase
 class PostCell: UITableViewCell {
 
     //MARK: - Properties
+    
     var request: Request?
     var requestPhoto: Request?
     var currentUserLikeRef: FIRDatabaseReference!
     var post: Post!
     var user = FIRAuth.auth()?.currentUser
+    
     
     //MARK: - IBOutlets
     
@@ -68,7 +70,7 @@ class PostCell: UITableViewCell {
             postImage.hidden = true
         }
         
-        //like button
+        //Like button
         currentUserLikeRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
             if let _ = snapshot.value as? NSNull {
                 self.setHeartImages("heart-empty")
@@ -77,7 +79,7 @@ class PostCell: UITableViewCell {
             }
         }
         
-        //user info
+        //User info
         DataService.ds.REF_USERS.child(post.username).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
             if let userInfo = snapshot.value as? [String: AnyObject] {
                 if let username = userInfo["username"] as? String {
@@ -117,6 +119,7 @@ class PostCell: UITableViewCell {
             }
         }
     }
+    
     
     //MARK: - Aux
     

@@ -49,10 +49,10 @@ class DataService {
     }
 
     func createFirebasePostWithAutoID(userId: String, postInfo: [String: AnyObject]) {
-        //create post
+        //Create post
         let autoIDPost = REF_POSTS.childByAutoId()
         autoIDPost.setValue(postInfo)
-        //save to current user
+        //Save to current user
         let postKey = autoIDPost.key
         REF_BASE.child("users/\(userId)/posts").updateChildValues([postKey: true])
     }

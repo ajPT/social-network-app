@@ -13,12 +13,15 @@ import Alamofire
 class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: - Properties
+    
     static var cache = NSCache()
+    
     var posts = [Post]()
     var imagePicker: UIImagePickerController!
     var imageSelected = false
     var currentUser: FIRUser!
     var spin = SpinIndicator()
+    
     
     //MARK: - IBOutlets
     
@@ -183,6 +186,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         cameraImg.image = UIImage(named: "camera")
         imageSelected = false
     }
+    
     
     //MARK: - Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
