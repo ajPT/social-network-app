@@ -58,6 +58,7 @@ class UtilAlerts {
     struct PassRecoveryMessages {
         static let OLD_PASS_MISSING = "You must insert the current password."
         static let NEW_PASS_MISSING = "You must insert the new password."
+        static let INCORRECT_PASSWORD = "The 'Old Password' does not match the actual password. Please insert it again."
     }
     
     

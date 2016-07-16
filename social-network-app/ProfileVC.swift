@@ -95,16 +95,31 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
         }
         
         if let oldPass = oldPassField.text where oldPass != "", let newPass = newPassField.text where newPass != "" {
-            //TODO: - check if old pass is correct
-            currentUser.updatePassword(newPass) { error in
-                if let error = error {
-                    print(error)
-                } else {
-                    // Password updated.
-                    self.oldPassField.text = ""
-                    self.newPassField.text = ""
+            let path = "\(uid)/email"
+            DataService.ds.REF_USERS.child(path).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                if let email = snapshot.value as? String {
+                    
+                    //Verify user's old password
+                    let credential = FIREmailPasswordAuthProvider.credentialWithEmail(email, password: oldPass)
+                    
+                    self.currentUser.reauthenticateWithCredential(credential, completion: { (error) in
+                        if error != nil {
+                            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.ERROR_WRONG_PASSWORD, msg: UtilAlerts.PassRecoveryMessages.INCORRECT_PASSWORD)
+                        } else {
+                            //Update Password
+                            self.currentUser.updatePassword(newPass) { error in
+                                if let error = error {
+                                    print(error)
+                                } else {
+                                    //Password updated.
+                                    self.oldPassField.text = ""
+                                    self.newPassField.text = ""
+                                }
+                            }
+                        }
+                    })
                 }
-            }
+            })
         } else if let oldPass = oldPassField.text where oldPass != "" {
             UtilAlerts().showAlert(self, title: UtilAlerts.Titles.PASSWORD_RECOVERY, msg: UtilAlerts.PassRecoveryMessages.NEW_PASS_MISSING)
         } else if let newPass = newPassField.text where newPass != "" {
