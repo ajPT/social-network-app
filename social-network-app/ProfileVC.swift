@@ -56,6 +56,8 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
     }
     
     @IBAction func onSaveBtnPressed(sender: UIButton) {
+        let uid = currentUser.uid
+        
         if changedphoto {
             if let img = userImg.image {
                 let imgData = UIImageJPEGRepresentation(img, 0.2)!
@@ -69,7 +71,6 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
                         if let downloadedData = mData {
                             if let downloadURL = downloadedData.downloadURL() {
                                 let url = downloadURL.absoluteString
-                                let uid = self.currentUser.uid
                                 let path = "\(uid)/photo"
                                 DataService.ds.REF_USERS.child(path).setValue(url)
                             }
@@ -80,17 +81,22 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
         }
         
         if let username = usernameField.text where username != "" {
-        
+            let path = "\(uid)/username"
+            DataService.ds.REF_USERS.child(path).setValue(username)
+            usernameField.text = ""
+            usernameField.placeholder = username
         }
         
         if let email = emailField.text where email != "" {
-        
+            let path = "\(uid)/email"
+            DataService.ds.REF_USERS.child(path).setValue(email)
+            emailField.text = ""
+            emailField.placeholder = email
         }
         
         if let oldPass = oldPassField.text where oldPass != "" {
         
         }
-        
         
     }
 
@@ -109,12 +115,7 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
         let userID = currentUser.uid
         DataService.ds.REF_USERS.child(userID).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             if let userInfo = snapshot.value as? [String: AnyObject] {
-                if let username = userInfo["username"] as? String {
-                    self.usernameField.placeholder = username
-                }
-                if let email = userInfo["email"] as? String {
-                    self.emailField.placeholder = email
-                }
+                
                 if let photo = userInfo["photo"] as? String {
                     let url = NSURL(string: photo)!
                     self.requestGetPhoto = Alamofire.request(.GET, url).response(completionHandler: { (request: NSURLRequest?, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) in
@@ -126,13 +127,22 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
                         }
                     })
                 }
+                
+                if let username = userInfo["username"] as? String {
+                    self.usernameField.placeholder = username
+                }
+                
                 if let provider = userInfo["provider"] as? String {
                     if provider != "firebase" {
                         self.hideEmailPassFields(true)
                     } else {
                         self.hideEmailPassFields(false)
+                        if let email = userInfo["email"] as? String {
+                            self.emailField.placeholder = email
+                        }
                     }
                 }
+                
             }
         })
     }
