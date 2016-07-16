@@ -11,9 +11,7 @@ import UIKit
 
 class UtilAlerts {
     
-    //MARK: - Alerts messages
-    
-    //MARK: Titles
+    //MARK: - Titles
     struct Titles {
         static let ERROR_EMAIL_ALREADY_IN_USE = "Email already exists"
         static let ERROR_WEAK_PASSWORD = "Weak password"
@@ -25,9 +23,10 @@ class UtilAlerts {
         static let ERROR_INTERNAL_ERROR = "Email is not valid"
         static let MISSING_FIELDS = "All fields are required"
         static let POST_RELATED = "There is a problem with your post"
+        static let PASSWORD_RECOVERY = "Missing information"
     }
     
-    //MARK: Login
+    //MARK: - Messages
     struct LoginMessages {
         static let UNKNOWN_ERROR_LOGIN = "Login failed."
         static let ERROR_WRONG_PASSWORD = "Please check your password."
@@ -54,6 +53,11 @@ class UtilAlerts {
     
     struct PostMessages {
         static let MISSING_DESCRIPTION = "You must insert a description."
+    }
+    
+    struct PassRecoveryMessages {
+        static let OLD_PASS_MISSING = "You must insert the current password."
+        static let NEW_PASS_MISSING = "You must insert the new password."
     }
     
     

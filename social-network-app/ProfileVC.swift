@@ -94,8 +94,21 @@ class ProfileVC: UIViewController, UINavigationControllerDelegate, UIImagePicker
             emailField.placeholder = email
         }
         
-        if let oldPass = oldPassField.text where oldPass != "" {
-        
+        if let oldPass = oldPassField.text where oldPass != "", let newPass = newPassField.text where newPass != "" {
+            //TODO: - check if old pass is correct
+            currentUser.updatePassword(newPass) { error in
+                if let error = error {
+                    print(error)
+                } else {
+                    // Password updated.
+                    self.oldPassField.text = ""
+                    self.newPassField.text = ""
+                }
+            }
+        } else if let oldPass = oldPassField.text where oldPass != "" {
+            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.PASSWORD_RECOVERY, msg: UtilAlerts.PassRecoveryMessages.NEW_PASS_MISSING)
+        } else if let newPass = newPassField.text where newPass != "" {
+            UtilAlerts().showAlert(self, title: UtilAlerts.Titles.PASSWORD_RECOVERY, msg: UtilAlerts.PassRecoveryMessages.OLD_PASS_MISSING)
         }
         
     }
